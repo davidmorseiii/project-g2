@@ -28,3 +28,4 @@ Figuring out laying out of project file structure
 
 Decide of task manager or different project.
 
+Next meeting is Thursday May 29 2025 at 12PM
