@@ -8,6 +8,7 @@
 
 ## Proposed Weekly Meeting Schedule
 - Tuesdays 12:00-12:30 PM (MS Teams)
+- Thursdays 12:00-12:30 PM (MS Teams) (As necessary)
 
 ## Scrum Master Rotation Plan
 - Sprint 1 (May 26–June 9): David
