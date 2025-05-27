@@ -2,17 +2,31 @@
 
 ## Team Member List
 - David Morse – @davidmorseiii
-- Taylor Hodson – @
-- Luke Merrill – @
+- Taylor Hodson – @TaylorHodson
+- Luke Merrill – @lfmerrill
+- Curtis Fairbanks - @ramble-hiker
 
 ## Proposed Weekly Meeting Schedule
-- Tuesdays 12:00-1:00 PM (MS Teams)
+- Tuesdays 12:00-12:30 PM (MS Teams)
 
 ## Scrum Master Rotation Plan
-- Sprint 1 (May 26–June 16): Taylor
-- Sprint 2 (June 17–July 8): David
-- Sprint 3 (July 9–July 30): Luke
+- Sprint 1 (May 26–June 9): David
+- Sprint 2 (June 10–June 24): Curtis
+- Sprint 3 (June 25–July 9): Luke
+- Sprint 4 (July 10–July 24): Taylor
 
+## Project Manager Rotation Plan
+- Sprint 1 (May 26–June 9): Curtis
+- Sprint 2 (June 10–June 24): Luke
+- Sprint 3 (June 25–July 9): Taylor
+- Sprint 4 (July 10–July 24): David
+  
+## Meeting Recorder Rotation Plan
+- Sprint 1 (May 26–June 9): Luke
+- Sprint 2 (June 10–June 24): Taylor
+- Sprint 3 (June 25–July 9): David
+- Sprint 4 (July 10–July 24): Curtis
+  
 ## Programming Language Selection
 - Python
 
@@ -20,4 +34,4 @@
 https://github.com/davidmorseiii/project-g2.git
 
 ## Zenhub Board Link
-(Board link will be added here)
+![image](https://github.com/user-attachments/assets/5e1e3923-7bd5-4bdc-9267-ca523519a1af)
