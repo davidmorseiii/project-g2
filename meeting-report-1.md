@@ -21,7 +21,10 @@ Attendence:
 - Tuesday is our mandatory meeting
 - Thursday is optional
 - Watch the videos for github and zenhub
-- 
+- Get comfortable with git
+- On thursday each member brings 2 project ideas and the group will vote on which one.
 
 Figuring out laying out of project file structure 
+
+Decide of task manager or different project.
 
