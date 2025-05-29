@@ -1,0 +1,42 @@
+{
+    "questions": [
+        {
+            "question_id": "1",
+            "question_text": "What is the capital of France?",
+            "options": [
+                {
+                    "option_id": "a",
+                    "option_text": "Paris"
+                },
+                {
+                    "option_id": "b",
+                    "option_text": "London"
+                },
+                {
+                    "option_id": "c",
+                    "option_text": "Berlin"
+                }
+            ],
+            "correct_option_id": "a"
+        },
+        {
+            "question_id": "2",
+            "question_text": "What is 2 + 2?",
+            "options": [
+                {
+                    "option_id": "a",
+                    "option_text": "3"
+                },
+                {
+                    "option_id": "b",
+                    "option_text": "4"
+                },
+                {
+                    "option_id": "c",
+                    "option_text": "5"
+                }
+            ],
+            "correct_option_id": "b"
+        }
+    ]
+}
