@@ -14,14 +14,14 @@ This is a command-line based trivia game written in Python. The game loads multi
 - Python 3.8 or higher
 
 ## File Structure
-main.py                 - Entry point of the application (Luke)
-question.py              - Defines the Question class (Curtis)
-game_engine.py           - Manages game state and scoring (David)
-cli_interface.py         - Handles user interaction (Luke)
-question_repository.py   - Loads questions from a JSON file (Taylor)
-questions.json           - Sample questions for testing (Taylor)
-tests/                   - Unit tests for all modules (Curtis)
-README.txt               - This file
+main.py - Entry point of the application (Luke)
+question.py - Defines the Question class (Curtis)
+game_engine.py - Manages game state and scoring (David)
+cli_interface.py - Handles user interaction (Luke)
+question_repository.py - Loads questions from a JSON file (Taylor)
+questions.json - Sample questions for testing (Taylor)
+tests/ - Unit tests for all modules (Curtis)
+README.txt - This file
 
 ## How to Run
 
