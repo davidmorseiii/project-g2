@@ -13,13 +13,6 @@ This is a command-line based trivia game written in Python. The game loads multi
 ## Requirements
 - Python 3.8 or higher
 
-## How to Run
-
-### 1. Clone the Repository
-```bash
-git clone <your-repo-url>
-cd <your-repo-directory>
-
 ## File Structure
 main.py                 - Entry point of the application (Luke)
 question.py              - Defines the Question class (Curtis)
@@ -29,3 +22,10 @@ question_repository.py   - Loads questions from a JSON file (Taylor)
 questions.json           - Sample questions for testing (Taylor)
 tests/                   - Unit tests for all modules (Curtis)
 README.txt               - This file
+
+## How to Run
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/davidmorseiii/project-g2.git
+cd project-g2
