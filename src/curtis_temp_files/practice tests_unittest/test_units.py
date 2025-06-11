@@ -1,6 +1,6 @@
 import unittest
 # import sys
-import unit_testing.main_phony as main_phony
+import main_phony
 # sys.path.append('..')
 # import main
 
@@ -9,4 +9,4 @@ import unit_testing.main_phony as main_phony
 
 class TestUnits(unittest.TestCase):
     def test_get_input():
-        result = get_input()
+        result = input()

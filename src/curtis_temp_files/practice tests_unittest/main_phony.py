@@ -18,5 +18,5 @@ def main_phoney():
     print("x: ", x)
 
 
-# if __name__ == "__main_phoney__":
-main_phoney()
+if __name__ == "__main__":
+    main_phoney()
