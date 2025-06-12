@@ -1,0 +1,552 @@
+[
+  {
+    "category": "General Knowledge",
+    "prompt": "What color is the sky on a clear day?",
+    "options": [
+      "Green",
+      "Red",
+      "Blue",
+      "Yellow"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "prompt": "What planet do we live on?",
+    "options": [
+      "Mars",
+      "Earth",
+      "Jupiter",
+      "Venus"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "Math",
+    "prompt": "What is 2 + 2?",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "prompt": "What is the capital of France?",
+    "options": [
+      "Berlin",
+      "Paris",
+      "Madrid",
+      "Rome"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "Animals",
+    "prompt": "Which animal says 'moo'?",
+    "options": [
+      "Pig",
+      "Cow",
+      "Dog",
+      "Sheep"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "prompt": "Who is Mickey Mouse's dog?",
+    "options": [
+      "Max",
+      "Pluto",
+      "Goofy",
+      "Snoopy"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "prompt": "Who was the first President of the United States?",
+    "options": [
+      "Abraham Lincoln",
+      "George Washington",
+      "Thomas Jefferson",
+      "John Adams"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "prompt": "What gas do humans need to breathe?",
+    "options": [
+      "Hydrogen",
+      "Nitrogen",
+      "Oxygen",
+      "Carbon Dioxide"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "Math",
+    "prompt": "What is 10 \u00f7 2?",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "General Knowledge",
+    "prompt": "How many days are there in a week?",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "10"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "Animals",
+    "prompt": "How many legs does a spider have?",
+    "options": [
+      "4",
+      "6",
+      "8",
+      "10"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "prompt": "What is H2O commonly known as?",
+    "options": [
+      "Salt",
+      "Water",
+      "Oxygen",
+      "Air"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "Math",
+    "prompt": "What is 100 divided by 10?",
+    "options": [
+      "5",
+      "8",
+      "10",
+      "20"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "prompt": "What is the capital of Japan?",
+    "options": [
+      "Seoul",
+      "Beijing",
+      "Tokyo",
+      "Bangkok"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "General Knowledge",
+    "prompt": "What do you use to eat soup?",
+    "options": [
+      "Knife",
+      "Fork",
+      "Spoon",
+      "Chopsticks"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "Pop Culture",
+    "prompt": "What is the name of Harry Potter\u2019s pet owl?",
+    "options": [
+      "Crookshanks",
+      "Fang",
+      "Scabbers",
+      "Hedwig"
+    ],
+    "answer": 3
+  },
+  {
+    "category": "History",
+    "prompt": "In what year did the Titanic sink?",
+    "options": [
+      "1905",
+      "1912",
+      "1920",
+      "1898"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "prompt": "What organ pumps blood through the body?",
+    "options": [
+      "Lungs",
+      "Stomach",
+      "Heart",
+      "Brain"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "Animals",
+    "prompt": "Which animal is known for carrying its baby in a pouch?",
+    "options": [
+      "Elephant",
+      "Kangaroo",
+      "Giraffe",
+      "Tiger"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "prompt": "Which country has the Great Wall?",
+    "options": [
+      "India",
+      "Japan",
+      "China",
+      "South Korea"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "Math",
+    "prompt": "What is 5 x 5?",
+    "options": [
+      "10",
+      "20",
+      "25",
+      "30"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "General Knowledge",
+    "prompt": "How many letters are there in the English alphabet?",
+    "options": [
+      "24",
+      "25",
+      "26",
+      "27"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "prompt": "Which part of the plant grows underground?",
+    "options": [
+      "Leaf",
+      "Flower",
+      "Stem",
+      "Root"
+    ],
+    "answer": 3
+  },
+  {
+    "category": "Pop Culture",
+    "prompt": "Which superhero is known as the 'Caped Crusader'?",
+    "options": [
+      "Superman",
+      "Batman",
+      "Spider-Man",
+      "Iron Man"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "prompt": "Which continent is Egypt in?",
+    "options": [
+      "Asia",
+      "Europe",
+      "Africa",
+      "South America"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "Animals",
+    "prompt": "Which bird is known for mimicking sounds and human speech?",
+    "options": [
+      "Eagle",
+      "Owl",
+      "Parrot",
+      "Pigeon"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "prompt": "Who discovered gravity when he saw an apple fall from a tree?",
+    "options": [
+      "Albert Einstein",
+      "Galileo Galilei",
+      "Isaac Newton",
+      "Charles Darwin"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "prompt": "What do humans use to smell?",
+    "options": [
+      "Eyes",
+      "Ears",
+      "Nose",
+      "Mouth"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "General Knowledge",
+    "prompt": "What color are school buses in the U.S.?",
+    "options": [
+      "Red",
+      "Yellow",
+      "Blue",
+      "Green"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "prompt": "What is the name of the cowboy in Toy Story?",
+    "options": [
+      "Woody",
+      "Buzz",
+      "Jessie",
+      "Andy"
+    ],
+    "answer": 0
+  },
+  {
+    "category": "Geography",
+    "prompt": "Which ocean is on the east coast of the United States?",
+    "options": [
+      "Pacific",
+      "Indian",
+      "Arctic",
+      "Atlantic"
+    ],
+    "answer": 3
+  },
+  {
+    "category": "Science",
+    "prompt": "What gas do plants use during photosynthesis?",
+    "options": [
+      "Oxygen",
+      "Carbon Dioxide",
+      "Nitrogen",
+      "Hydrogen"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "Math",
+    "prompt": "What is 12 - 5?",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "Animals",
+    "prompt": "What is the largest land animal?",
+    "options": [
+      "Giraffe",
+      "Elephant",
+      "Rhino",
+      "Hippopotamus"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "prompt": "Who was the first man to walk on the Moon?",
+    "options": [
+      "Yuri Gagarin",
+      "Buzz Aldrin",
+      "Neil Armstrong",
+      "Alan Shepard"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "General Knowledge",
+    "prompt": "How many sides does a triangle have?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "prompt": "Which wizarding house does Harry Potter belong to?",
+    "options": [
+      "Hufflepuff",
+      "Slytherin",
+      "Gryffindor",
+      "Ravenclaw"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "prompt": "What is the boiling point of water in Celsius?",
+    "options": [
+      "50",
+      "90",
+      "100",
+      "120"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "Math",
+    "prompt": "What is 9 x 3?",
+    "options": [
+      "27",
+      "21",
+      "18",
+      "36"
+    ],
+    "answer": 0
+  },
+  {
+    "category": "Animals",
+    "prompt": "Which animal is known as the King of the Jungle?",
+    "options": [
+      "Tiger",
+      "Lion",
+      "Elephant",
+      "Panther"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "General Knowledge",
+    "prompt": "Which season comes after summer?",
+    "options": [
+      "Spring",
+      "Winter",
+      "Autumn",
+      "Rainy"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "prompt": "What is the capital of Canada?",
+    "options": [
+      "Toronto",
+      "Ottawa",
+      "Vancouver",
+      "Montreal"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "prompt": "Which part of your body helps you see?",
+    "options": [
+      "Nose",
+      "Ears",
+      "Eyes",
+      "Mouth"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "prompt": "In what year did World War II end?",
+    "options": [
+      "1940",
+      "1942",
+      "1945",
+      "1950"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "Pop Culture",
+    "prompt": "What is the name of the snowman in Frozen?",
+    "options": [
+      "Sven",
+      "Olaf",
+      "Kristoff",
+      "Elsa"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "Math",
+    "prompt": "What is 15 divided by 3?",
+    "options": [
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "Animals",
+    "prompt": "Which animal is known to have a long neck?",
+    "options": [
+      "Elephant",
+      "Horse",
+      "Giraffe",
+      "Zebra"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "prompt": "What force pulls objects toward the ground?",
+    "options": [
+      "Magnetism",
+      "Electricity",
+      "Gravity",
+      "Friction"
+    ],
+    "answer": 2
+  },
+  {
+    "category": "Pop Culture",
+    "prompt": "What is the name of the green ogre in the movie Shrek?",
+    "options": [
+      "Donkey",
+      "Shrek",
+      "Fiona",
+      "Dragon"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "Math",
+    "prompt": "What is the square root of 81?",
+    "options": [
+      "8",
+      "9",
+      "10",
+      "11"
+    ],
+    "answer": 1
+  }
+]
