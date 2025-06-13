@@ -3,6 +3,8 @@ import os
 
 class CLIInterface:
     def __init__(self):
+        # run something to get the questions
+        #pass that to the game engine
         self.engine = GameEngine()
 
     def clear(self):

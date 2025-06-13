@@ -25,6 +25,10 @@ This is a command-line based trivia game written in Python. The game loads multi
 
 ## How to Run
 
+
+## Project management link
+- [Taiga Link](https://taiga.luke-merrill.com/project/project-g2/backlog)
+
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/davidmorseiii/project-g2.git

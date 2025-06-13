@@ -20,7 +20,7 @@ class Question():
             return 3
 
     def is_correct(self, ans:str):
-        return answer_to_index(ans) == self.answer
+        return self.answer_to_index(ans) == self.answer
 
 f = open('QuestionRepository.json')
 
