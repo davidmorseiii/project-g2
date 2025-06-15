@@ -1,0 +1,31 @@
+----Design Document----
+Authors:
+  -David Morse
+  -Taylor Hodsun
+  -Luke Merril
+  -Curtis Fairbanks
+Reviewer:
+  -Quadrat E Alahy Ratul
+Introduction:
+  The Trivia Game is a command line interface, multiple choice, trivia game.  
+  Once the game begins questions are presented to the screen and the player
+  can choose from a, b, c, or d to select the correct choice.  The player can
+  keep score and quit any time or challenge themselves by answering all the questions.
+Design Considerations:
+  Upon selection of a program that would be more difficult than "paper, rock, scissors"
+  but not so difficult that focus could not be kept on team interactions and group
+  participation the Trivia Game was selected by popular vote. Using the command line 
+  interface was a requirement and a string multiple choice answer was selected in order
+  to keep game play simple but allow for the need to convert from an index value.
+Architectural Stragedies:
+  In order to form the program the game has been broken into functions and classes.
+  There will be a "main.py" program file that runs all code. In main.py there will be a
+  call to "cli.py" which starts and controls the game interface and then calls to
+  "game.py" which runs the game. A Questions structure will call in the ".json" list 
+  of dictionaries for the game and Question objects will be used to run each trivia
+  question.
+Further Development:
+  Future designs will most likely include a scoreboard and a graphical user interace
+  to improve game quality - in any case the true nature of development in this course
+  will be to foster team building and to pursue software development through
+  collaboration.
