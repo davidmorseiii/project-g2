@@ -46,7 +46,7 @@ cd src
 ## 3. Run the Program
 ```bash
 python3 main.py
-
-Notes.. you must have python installed on your computer
 ```
+Notes.. you must have python installed on your computer
+
 
