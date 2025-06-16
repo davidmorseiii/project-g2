@@ -24,6 +24,10 @@ This is a command-line based trivia game written in Python. The game loads multi
 - `README.txt` – This file
 
 ## How to Run
+Run in terminal to start program
+```bash
+python3 src/main.py
+```
 
 
 ## Project management link
