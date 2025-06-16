@@ -3,7 +3,9 @@ import time
 
 def main():
     cli = CLIInterface()
-    cli.run()
+    cli.clear()
+    cli.start_game()
+    # cli.run()
 
 
 
