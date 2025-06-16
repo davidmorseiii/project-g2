@@ -1,22 +1,27 @@
 ----Design Document----
+
 Authors:
   -David Morse
   -Taylor Hodsun
   -Luke Merril
   -Curtis Fairbanks
+
 Reviewer:
   -Quadrat E Alahy Ratul
+
 Introduction:
   The Trivia Game is a command line interface, multiple choice, trivia game.  
   Once the game begins questions are presented to the screen and the player
   can choose from a, b, c, or d to select the correct choice.  The player can
   keep score and quit any time or challenge themselves by answering all the questions.
+
 Design Considerations:
   Upon selection of a program that would be more difficult than "paper, rock, scissors"
   but not so difficult that focus could not be kept on team interactions and group
   participation the Trivia Game was selected by popular vote. Using the command line 
   interface was a requirement and a string multiple choice answer was selected in order
   to keep game play simple but allow for the need to convert from an index value.
+
 Architectural Stragedies:
   In order to form the program the game has been broken into functions and classes.
   There will be a "main.py" program file that runs all code. In main.py there will be a
@@ -24,10 +29,29 @@ Architectural Stragedies:
   "game.py" which runs the game. A Questions structure will call in the ".json" list 
   of dictionaries for the game and Question objects will be used to run each trivia
   question.
+
 Further Development:
   Future designs as time allows are projected to include a scoreboard and a graphical user interace
   to improve game quality - in any case the true nature of development in this course
   will be to foster team building and to pursue software development through
   collaboration.
+
+User Stories:
+  "Hi, my name's John! As a gamer, I want to keep track of my score, so that I can be the best when I play a game!"
+  "Tom here...as a programmer. I want to be able to add or change the questions easily so the Trivia Game can use a different database."
+
+Use Cases:
+  -To start the game you run the main.py file using python.
+  -In commandline navigate to the main.py file location: then type in "py main.py"
+  -When the game starts there is a "welcome" and a start page.
+  -On the start page you have the option to begin a new game or exit
+  -When you choose to start the game the screen is cleared and the first question is presented with a, b, c, or d, options.
+  -If you pick the wrong answer the game moves on to the next question.
+  -If you pick the right question you also move on to the next question.
+  -If you get a question right the score increases.
+  -The score is displayed on the screen.
+  -At any point in the game you can quit by pressing 'q'.
+  -When you quit you get to see your score and an exit message (further development may include a scoreboard).
+
 Charts/Diagrams:
   (See in file: design uml, design flowchart)
