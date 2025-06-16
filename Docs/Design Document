@@ -25,7 +25,9 @@ Architectural Stragedies:
   of dictionaries for the game and Question objects will be used to run each trivia
   question.
 Further Development:
-  Future designs will most likely include a scoreboard and a graphical user interace
+  Future designs as time allows are projected to include a scoreboard and a graphical user interace
   to improve game quality - in any case the true nature of development in this course
   will be to foster team building and to pursue software development through
   collaboration.
+Charts/Diagrams:
+  (See in file: design uml, design flowchart)
