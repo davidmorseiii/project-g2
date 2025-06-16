@@ -1,9 +1,12 @@
+import json
+from .Question import Question
+
 class GameEngine:
-    def __init__(self, questions):
+    def __init__(self):
         """
         Initialize game engine with a list of Question objects.
         """
-        self.questions = questions
+        self.questions = []
         self.current_index = 0
         self.score = 0
 
@@ -49,4 +52,10 @@ class GameEngine:
         Returns total number of questions in the game.
         """
         return len(self.questions)
+    
+    def load_questions_json(self):
+        with open("QuestionRepository.json", "r") as f:
+            import json
+            data = json.load(f)
+            self.questions = [Question(q) for q in data]
   

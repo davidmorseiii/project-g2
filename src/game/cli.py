@@ -6,6 +6,8 @@ class CLIInterface:
         # run something to get the questions
         #pass that to the game engine
         self.engine = GameEngine()
+        self.engine.load_questions_json()
+        print(self.engine.questions)
 
     def clear(self):
         os.system('cls' if os.name == 'nt' else 'clear')
