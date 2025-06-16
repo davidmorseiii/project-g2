@@ -37,4 +37,10 @@ python3 src/main.py
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/davidmorseiii/project-g2.git
+## 2. Navigate to the file
 cd project-g2
+cd src
+## 3. Run the Program
+python3 main.py
+
+Notes.. you must have python installed on your computer
