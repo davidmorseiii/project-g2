@@ -3,6 +3,7 @@ import time
 
 def main():
     cli = CLIInterface()
+    cli.run()
 
 
 
