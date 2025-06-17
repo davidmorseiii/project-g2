@@ -23,12 +23,6 @@ This is a command-line based trivia game written in Python. The game loads multi
 - `tests/` – Unit tests for all modules (**Curtis**)
 - `README.txt` – This file
 
-## How to Run
-Run in terminal to start program
-```bash
-python3 src/main.py
-```
-
 
 ## Project management link
 - [Taiga Link](https://taiga.luke-merrill.com/project/project-g2/backlog)
