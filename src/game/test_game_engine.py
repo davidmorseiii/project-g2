@@ -1,5 +1,5 @@
 from game_engine import GameEngine
-from game.question import Question
+from game.Question import Question
 import pytest
 
 def test_game_engine_initialization():
