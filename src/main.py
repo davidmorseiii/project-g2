@@ -5,6 +5,7 @@ def main():
     cli = CLIInterface()
     cli.clear()
     cli.start_game()
+    # cli.run()
 
 
 

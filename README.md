@@ -24,12 +24,29 @@ This is a command-line based trivia game written in Python. The game loads multi
 - `README.txt` – This file
 
 ## How to Run
+Run in terminal to start program
+```bash
+python3 src/main.py
+```
 
 
 ## Project management link
 - [Taiga Link](https://taiga.luke-merrill.com/project/project-g2/backlog)
+- [unit_test_spreadsheet](https://docs.google.com/spreadsheets/d/1E8BiflJdZtr32lMwURZAU-tqDZDZ60ykgGHYlUxTroA/edit?gid=0#gid=0)
 
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/davidmorseiii/project-g2.git
+```
+## 2. Navigate to the file
+```bash
 cd project-g2
+cd src
+```
+## 3. Run the Program
+```bash
+python3 main.py
+```
+Notes.. you must have python installed on your computer
+
+
