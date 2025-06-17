@@ -1,5 +1,15 @@
-from game.game_engine import GameEngine
+
 import os
+import sys
+
+# Get the parent directory
+# parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+# game_dir = parent_dir + "\\game"
+game_dir = os.path.dirname(__file__)
+print("game_dir: ", game_dir)
+sys.path.append(game_dir)
+
+from game_engine import GameEngine
 
 class CLIInterface:
     def __init__(self):

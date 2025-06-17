@@ -1,5 +1,6 @@
+
 import json
-from .Question import Question
+from Question import Question
 
 class GameEngine:
     def __init__(self):
@@ -54,7 +55,13 @@ class GameEngine:
         return len(self.questions)
     
     def load_questions_json(self):
-        with open("QuestionRepository.json", "r") as f:
+        import os
+        import sys
+
+        # Get the path to QuestionRepository.json
+        src_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+        print("src_dir: ", src_dir)
+        with open(src_dir + "\\QuestionRepository.json", "r") as f:
             import json
             data = json.load(f)
             self.questions = [Question(q) for q in data]
