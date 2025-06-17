@@ -54,7 +54,7 @@ class GameEngine:
         return len(self.questions)
     
     def load_questions_json(self):
-        with open("src/QuestionRepository.json", "r") as f:
+        with open("QuestionRepository.json", "r") as f:
             import json
             data = json.load(f)
             self.questions = [Question(q) for q in data]
