@@ -1,4 +1,4 @@
-from .game_engine import GameEngine
+from game.game_engine import GameEngine
 import os
 
 class CLIInterface:

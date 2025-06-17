@@ -1,5 +1,6 @@
 import json
-from .Question import Question
+import os
+from game.question import Question
 
 class GameEngine:
     def __init__(self):
@@ -53,12 +54,20 @@ class GameEngine:
         """
         return len(self.questions)
     
+
+
     def load_questions_json(self):
-        with open("QuestionRepository.json", "r") as f:
-            import json
-            data = json.load(f)
-            self.questions = [Question(q) for q in data]
-        # print(f"Loaded {len(self.questions)} questions.")
-        # for q in self.questions:
-        #     print(q)
-  
+        #more intelligent way to load questions
+
+        paths_to_try = ["QuestionRepository.json", "src/QuestionRepository.json"]
+
+        for path in paths_to_try:
+            if os.path.exists(path):
+                with open(path, "r") as f:
+                    data = json.load(f)
+                    self.questions = [Question(q) for q in data]
+                return
+
+        raise FileNotFoundError("QuestionRepository.json not found in either location.")
+
+    

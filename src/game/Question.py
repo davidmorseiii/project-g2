@@ -1,8 +1,8 @@
-
+import time
 import json
 
 class Question():
-    def __init__(self, my_question:str):
+    def __init__(self, my_question:dict):
         self.category = my_question["category"]
         self.prompt = my_question["prompt"]
         self.options = my_question["options"]
@@ -15,8 +15,15 @@ class Question():
         if ans == "c": return 2
         if ans == "d": return 3
 
-    def is_correct(self, ans:str):
-        return self.answer_to_index(ans) == self.answer
+    def is_correct(self, ans):
+        if type(ans) is str:
+            return self.answer_to_index(ans) == self.answer
+        elif type(ans) is int:
+            return ans == self.answer
+        else:
+            raise ValueError("Invalid answer type. Please provide a string or integer.")
+
+        
     
     def __str__(self):
         opts = "\n".join(self.options)
