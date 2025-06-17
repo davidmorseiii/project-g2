@@ -6,8 +6,10 @@ import os
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 game_dir = parent_dir + "\\game"
 print("game_dir: ", game_dir)
+
 # Add parent directory to sys.path
 sys.path.append(parent_dir)
+
 # Add game directory to sys.path
 sys.path.append(game_dir)
 import main
