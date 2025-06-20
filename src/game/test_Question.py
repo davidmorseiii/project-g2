@@ -1,4 +1,4 @@
-from game.Question import Question
+from game.question import Question
 import pytest
 
 def test_question_initialization():
