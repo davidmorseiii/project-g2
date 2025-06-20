@@ -1,6 +1,6 @@
 import json
 import os
-from game.Question import Question
+from game.question import Question
 
 class GameEngine:
     def __init__(self):
