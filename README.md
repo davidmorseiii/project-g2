@@ -23,6 +23,8 @@ This is a command-line based trivia game written in Python. The game loads multi
 - `tests/` – Unit tests for all modules (**Curtis**)
 - `README.txt` – This file
 
+## Wire Frame Design Link:
+- https://www.figma.com/design/JLD2Cb2vKWvtKR6VViuSk9/Figma-basics?node-id=1669-162202&t=NEpK1vVYwpfzj5np-1
 
 ## Project management link
 - [Taiga Link](https://taiga.luke-merrill.com/project/project-g2/backlog)
