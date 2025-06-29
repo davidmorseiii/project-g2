@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #2b414f;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.welcome-container {
+    padding-top: 100px;
+}
+
+h1 {
+    color: #ff5e00;
+    text-decoration: underline;
+    font-size: 2em;
+}
+
+.menu-box {
+    background-color: white;
+    padding: 30px;
+    margin: 50px auto;
+    width: 300px;
+    border-radius: 8px;
+}
+
+.menu-box button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.game-container {
+    padding: 50px;
+    color: white;
+}
+
+.prompt-text {
+    font-size: 1.2em;
+    margin: 20px 0;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    max-width: 400px;
+    margin: 0 auto 30px auto;
+    background-color: white;
+    color: black;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.option-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+button[type="submit"] {
+    background-color: #00aa00;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.feedback {
+    margin-top: 20px;
+    font-size: 1.3em;
+}
+
+.feedback.correct {
+    color: limegreen;
+}
+
+.feedback.wrong {
+    color: red;
+}
+
+.scoreboard {
+    margin-top: 30px;
+    font-weight: bold;
+    background-color: lightgray;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+}
