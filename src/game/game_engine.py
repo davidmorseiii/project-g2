@@ -59,7 +59,7 @@ class GameEngine:
     def load_questions_json(self):
         #more intelligent way to load questions
 
-        paths_to_try = ["QuestionRepository.json", "src/QuestionRepository.json"]
+        paths_to_try = ["QuestionRepository.json", "game/QuestionRepository.json"]
 
         for path in paths_to_try:
             if os.path.exists(path):
