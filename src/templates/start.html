@@ -11,15 +11,15 @@
     message: str
   }
 
-  player1_score: int
+  player_score: int
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Trivia Game</title>
-    <link rel="stylesheet" href="../static/style.css">
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+    <!--<link rel="stylesheet" href="../static/style.css">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="game-container">
@@ -49,7 +49,7 @@
         {% endif %}
 
         <div class="scoreboard">
-            Player1 Score: {{ player1_score }}
+            Player Score: {{ player_score }}
         </div>
     </div>
 </body>
