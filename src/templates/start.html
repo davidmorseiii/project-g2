@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trivia Game</title>
+</head>
+<body>
+    <div class="game-container">
+        <h1><u>Trivia Game</u></h1>
+
+        <p class="prompt-text">{{ question.prompt }}</p>
+
+        <form method="post">
+            <div class="options-grid">
+                {% for option in question.options %}
+                <div class="option-cell">
+                    <input type="radio" name="answer" value="{{ loop.index0 }}" id="option{{ loop.index0 }}" required>
+                    <label for="option{{ loop.index0 }}">
+                        {{ ['A', 'B', 'C', 'D'][loop.index0] }}. {{ option }}
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if feedback %}
+        <div class="feedback {{ 'correct' if feedback.correct else 'wrong' }}">
+            {{ feedback.message }}
+        </div>
+        {% endif %}
+
+        <div class="scoreboard">
+            Player1 Score: {{ player1_score }}
+        </div>
+    </div>
+</body>
+</html>
