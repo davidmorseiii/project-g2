@@ -35,9 +35,11 @@
                     <label for="option{{ loop.index0 }}">
                         {{ ['A', 'B', 'C', 'D'][loop.index0] }}. {{ option }}
                     </label>
+                    
                 </div>
                 {% endfor %}
             </div>
+            <input type="hidden" name="current_score" value="{{ player_score }}">
 
             <button type="submit">Submit</button>
         </form>
