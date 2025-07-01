@@ -4,7 +4,7 @@
 - David Morse – @davidmorseiii
 - Taylor Hodson – @TaylorHodson
 - Luke Merrill – @lfmerrill
-- Curtis Fairbanks - @ramble-hiker
+- Curtis Fairbanks - @ramble-hiker - Withdrew
 
 ## Proposed Weekly Meeting Schedule
 - Tuesdays 12:00-12:30 PM (MS Teams)
@@ -26,7 +26,7 @@
 - Sprint 1 (May 26–June 9): Luke
 - Sprint 2 (June 10–June 24): Taylor
 - Sprint 3 (June 25–July 9): David
-- Sprint 4 (July 10–July 24): Curtis
+- Sprint 4 (July 10–July 24): Luke
   
 ## Programming Language Selection
 - Python
