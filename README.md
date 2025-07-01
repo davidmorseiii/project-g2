@@ -14,13 +14,14 @@ This is a command-line based trivia game written in Python. The game loads multi
 - Python 3.8 or higher
 
 ## File Structure
-- `main.py` – Entry point of the application (**Luke**)
-- `question.py` – Defines the `Question` class (**Curtis**)
+- `app.py` – Entry point of the application (**Luke**)
+- `question.py` – Defines the `Question` class (**Taylor**)
 - `game_engine.py` – Manages game state and scoring (**David**)
+- `test_app.py` – Prototype web app and discovery (**David**)
 - `cli_interface.py` – Handles user interaction (**Luke**)
 - `question_repository.py` – Loads questions from a JSON file (**Taylor**)
 - `questions.json` – Sample questions for testing (**Taylor**)
-- `tests/` – Unit tests for all modules (**Curtis**)
+- `tests/` – Unit tests for all modules (**Luke**)
 - `README.txt` – This file
 
 ## Wireframe Design Link:
@@ -34,15 +35,37 @@ This is a command-line based trivia game written in Python. The game loads multi
 ```bash
 git clone https://github.com/davidmorseiii/project-g2.git
 ```
-## 2. Navigate to the file
+
+### 2. Navigate to the project directory
 ```bash
 cd project-g2
 cd src
 ```
-## 3. Run the Program
+
+### 3. (Recommended) Create a virtual environment
+
+#### On macOS/Linux:
 ```bash
-python3 main.py
+python3 -m venv venv
+source venv/bin/activate
 ```
-Notes.. you must have python installed on your computer
+
+#### On Windows:
+```cmd
+python -m venv venv
+venv\Scripts\activate
+```
+
+### 4. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 5. Run the Program
+```bash
+python app.py
+```
+
+**Note:** You must have Python installed on your computer. If you do not have a `requirements.txt` file, you can skip step 4.
 
 
