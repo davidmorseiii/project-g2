@@ -1,0 +1,36 @@
+<!--
+  the following variables need to be passed from Flask:
+
+  question: {
+    prompt: str,
+    options: list[str] (length 4)
+  }
+
+  feedback: Optional {
+    correct: bool,
+    message: str
+  }
+
+  player_score: int
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trivia Game</title>
+    <!--<link rel="stylesheet" href="../static/style.css">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="game-container">
+        <h1><u>Trivia Game</u></h1>
+
+        <div class="scoreboard">
+            Final Score: {{ player_score }}
+        </div>
+        <form action="/" method="get">
+                <button type="submit">Go to Home</button>
+        </form>
+    </div>
+</body>
+</html>

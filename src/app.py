@@ -33,5 +33,9 @@ def display_question():
 def home():
     return render_template("index.html")
 
+@app.route('/results')
+def results():
+    return render_template("results.html", player_score=0)
+
 if __name__ == '__main__':
     app.run(debug=True)
