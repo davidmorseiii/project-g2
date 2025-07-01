@@ -1,27 +1,39 @@
 # Project-G2 Trivia CLI Game
 
 ## Overview
-This is a command-line based trivia game written in Python. The game loads multiple-choice questions from a JSON file and quizzes the player one question at a time. It tracks the player's score, gives feedback after each answer, and shows the final results at the end. The project is designed to be modular and will eventually support a graphical user interface (GUI) in a future release.
+Our Trivia Game is a Python-based trivia application that started as a command-line (CLI) game and is evolving into a web-based GUI version using Flask. The game quizzes the player with multiple-choice questions pulled from a JSON file, tracks the score, and presents results. The project uses a modular structure and supports expansion to multiplayer, persistent storage, and leaderboard features.
 
 ## Features
-- Loads questions from a JSON file
-- Presents multiple-choice questions one at a time
-- Tracks and displays the player’s score
-- Simple command-line interface (CLI)
-- Modular codebase prepared for future GUI expansion
+- Loads questions dynamically from a JSON file
+- CLI version for terminal gameplay
+- Web-based GUI built with Flask and HTML templates
+- Real-time scoring and feedback
+- Final results screen
+- Modular structure ready for future features:
+    - Multiplayer support
+    - Leaderboards
+    - Timed rounds
+    - Difficulty filtering
 
 ## Requirements
 - Python 3.8 or higher
+- Flask 2.0 or higher (for GUI version)
+- Web browser (for GUI version)
 
 ## File Structure
-- `app.py` – Entry point of the application (**Luke**)
-- `question.py` – Defines the `Question` class (**Taylor**)
-- `game_engine.py` – Manages game state and scoring (**David**)
-- `test_app.py` – Prototype web app and discovery (**David**)
-- `cli_interface.py` – Handles user interaction (**Luke**)
-- `question_repository.py` – Loads questions from a JSON file (**Taylor**)
-- `questions.json` – Sample questions for testing (**Taylor**)
-- `tests/` – Unit tests for all modules (**Luke**)
+- `app.py` – Main Flask application and route controller
+- `question.py` – Defines the `Question` class
+- `game_engine.py` – Game logic, state handling, and score tracking
+- `test_app.py` – Prototype web app and discovery
+- `cli_interface.py` – CLI input/output logic for terminal-based gameplay
+- `question_repository.py` – Loads and parses trivia questions from a JSON file
+- `templates/` - HTML templates for the web GUI
+    - `index.html` – Home screen UI
+    - `start.html` – Main game interface
+    - `game_over.html` – Final score screen
+- `static/style.css` - Basic styles used by the GUI
+- `questions.json` – Sample JSON dataset used by the game
+- `tests/` – Unit tests for all modules
 - `README.txt` – This file
 
 ## Wireframe Design Link:
@@ -62,10 +74,13 @@ pip install -r requirements.txt
 ```
 
 ### 5. Run the Program
+For CLI version:
+```bash
+python main.py
+```
+For Web GUI version:
 ```bash
 python app.py
 ```
 
-**Note:** You must have Python installed on your computer. If you do not have a `requirements.txt` file, you can skip step 4.
-
-
+**Note:** You must have Python installed on your computer. If you do not have a `requirements.txt` file, you can skip step 4. The GUI will be accessible at http://localhost:5000 after running app.py.
