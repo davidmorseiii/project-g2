@@ -22,6 +22,8 @@ class GameEngine:
         Returns current Question object, or None if no more questions.
         """
         if self.has_more_questions():
+            print(self.questions[self.current_index])
+            print(f"Current index: {self.current_index}, Total questions: {len(self.questions)}")
             return self.questions[self.current_index]
         return None
 
@@ -59,7 +61,7 @@ class GameEngine:
     def load_questions_json(self):
         #more intelligent way to load questions
 
-        paths_to_try = ["QuestionRepository.json", "game/QuestionRepository.json"]
+        paths_to_try = ["QuestionRepository.json", "game/QuestionRepository.json", "src/game/QuestionRepository.json"]
 
         for path in paths_to_try:
             if os.path.exists(path):
