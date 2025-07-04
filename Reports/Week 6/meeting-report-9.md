@@ -1,5 +1,5 @@
 Meeting Report 8
-Date: June 26, 2025 7:00 PM
+Date: July 3rd, 2025 7:00 PM
 Attendance:
 
 •	Taylor: Project Manager
