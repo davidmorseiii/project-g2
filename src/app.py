@@ -29,9 +29,11 @@ def display_question():
 
     if request.method == 'POST':
         selected = int(request.form.get("answer"))
+
+        print(question.is_correct(selected))
         
-        correct_answer = 2 #Paris
-        if selected and selected == correct_answer:
+        # correct_answer = 2 #Paris
+        if selected and question.is_correct(selected):
             feedback = { "correct": True, "message": "Correct!" }
             player_score += 1
         else:
