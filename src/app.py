@@ -39,6 +39,10 @@ def display_question():
         else:
             feedback = { "correct": False, "message": "Wrong! Try again." }
         current_question += 1
+        engine.current_index = current_question
+        question = engine.get_current_question()
+
+        
 
     return render_template(
         "start.html",
