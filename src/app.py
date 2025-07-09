@@ -21,11 +21,9 @@ def display_question():
     engine.load_questions_json()
     engine.current_index = current_question
     engine.score = player_score
+    question = engine.get_current_question()
     
-    if engine.has_more_questions():
-        question = engine.get_current_question()
-    else:
-        return render_template("results.html", player_score=player_score)
+
 
     if request.method == 'POST':
         selected = int(request.form.get("answer"))
@@ -40,7 +38,12 @@ def display_question():
             feedback = { "correct": False, "message": "Wrong! Try again." }
         current_question += 1
         engine.current_index = current_question
+        
+    
+    if engine.has_more_questions():
         question = engine.get_current_question()
+    else:
+        return render_template("results.html", player_score=player_score)
 
         
 
