@@ -31,6 +31,29 @@
         <form action="/" method="get">
                 <button type="submit">Go to Home</button>
         </form>
+        <button id="modeToggle">Toggle Night/Day Mode</button>
     </div>
+
+    <script>
+        const toggleBtn = document.getElementById('modeToggle');
+
+        // Load saved mode from localStorage
+        const savedMode = localStorage.getItem('theme');
+        if (savedMode === 'night') {
+            document.body.classList.add('night-mode');
+            toggleBtn.textContent = 'Switch to Day Mode';
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('night-mode');
+            
+            const isNight = document.body.classList.contains('night-mode');
+            localStorage.setItem('theme', isNight ? 'night' : 'day');
+
+            toggleBtn.textContent = isNight 
+                ? 'Switch to Day Mode' 
+                : 'Switch to Night Mode';
+        });
+    </script>    
 </body>
 </html>

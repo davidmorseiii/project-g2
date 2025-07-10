@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #2b414f;
+    background-color: #4C721D;
     color: white;
     text-align: center;
     margin: 0;
@@ -91,4 +91,29 @@ button[type="submit"] {
     color: black;
     padding: 10px;
     border-radius: 5px;
+}
+
+body.night-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.night-mode .menu-box,
+body.night-mode .options-grid {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+body.night-mode h1 {
+    color: #ffa500;
+}
+
+body.night-mode .scoreboard {
+    background-color: #333;
+    color: white;
+}
+
+body.night-mode button[type="submit"] {
+    background-color: #333;
+    color: #fff;
 }
