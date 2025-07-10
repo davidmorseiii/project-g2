@@ -60,7 +60,7 @@ def display_question():
         current_question=current_question,
     )
 
-@app.route('/custom')
+@app.route('/custom', methods=['GET', 'POST'])
 def custom_game():
     """
     In memory collector for custom questions.
