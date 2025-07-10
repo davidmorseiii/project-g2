@@ -1,7 +1,12 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 from game.game_engine import GameEngine
 
 app = Flask(__name__)
+app.secret_key = "dev.secret" # this is needed for session storage
+
+@app.route('/')
+def home():
+    return render_template("index.html")
 
 @app.route('/start', methods=['GET', 'POST'])
 def display_question():
@@ -55,9 +60,34 @@ def display_question():
         current_question=current_question,
     )
 
-@app.route('/')
-def home():
-    return render_template("index.html")
+@app.route('/custom')
+def custom_game():
+    """
+    In memory collector for custom questions.
+    Session list to be replaced with SQLite persistence later.
+    """
+    if request.method == 'POST':
+        q = {
+            "category": "Custom",
+            "prompt": request.form['prompt'],
+            "options": [
+                request.form['option_a'],
+                request.form['option_b'],
+                request.form['option_c'],
+                request.form['option_d']
+            ],
+            "answer": int(request.form['correct'])
+        }
+
+        # store in memory for now
+        custom_qs = session.get('custom_questions', [])
+        custom_qs.append(q)
+        session['custom_questions'] = custom_qs
+
+        # re-render template with success flag
+        return render_template('custom_game.html', success=True)
+    
+    return render_template('custom_game.html', success=False)
 
 @app.route('/results')
 def results():
