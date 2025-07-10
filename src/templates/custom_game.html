@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Custom Game | Trivia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="game-container">
+        <h1><u>Create a Custom Trivia Question</u></h1>
+
+        {# show a one off success banner after POST #}
+        {% if success %}
+        <div class="feedback correct">
+            Question saved! You can add another or head back home.
+        </div>
+        {% endif %}
+
+        <form method="POST" class="custom-form">
+            <label for="prompt">Question Prompt</label>
+            <textarea id="prompt" name="prompt" required rows="3"></textarea>
+
+            <label for="option_a">Option A</label>
+            <input id="option_a" name="option_a" type="text" required>
+
+            <label for="option_b">Option B</label>
+            <input id="option_b" name="option_b" type="text" required>
+
+            <label for="option_c">Option C</label>
+            <input id="option_c" name="option_c" type="text" required>
+
+            <label for="option_d">Option D</label>
+            <input id="option_d" name="option_d" type="text" required>
+
+            <label for="correct">Correct Answer</label>
+            <select id="correct" name="correct" required>
+                <option value="0">A</option>
+                <option value="1">B</option>
+                <option value="2">C</option>
+                <option value="3">D</option>
+            </select>
+
+            <button type="submit">Save Question</button>
+        </form>
+
+        <form action="/" method="get">
+            <button type="submit">Back to Home</button>
+        </form>
+    </div>
+</body>
+
+</html>
