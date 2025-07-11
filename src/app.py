@@ -62,11 +62,19 @@ def display_question():
 
 @app.route('/custom', methods=['GET', 'POST'])
 def custom_game():
-    """
-    In memory collector for custom questions.
-    Session list to be replaced with SQLite persistence later.
-    """
+    if request.args.get('reset') == 'true':
+        session.pop('custom_set_name', None)
+        session.pop('custom_questions', None)
+        return render_template('custom_game.html', success=False)
+
     if request.method == 'POST':
+        # name the set if not done yet
+        if 'set_name' in request.form:
+            session['custom_set_name'] = request.form['set_name']
+            session['custom_questions'] = []  # Initialize fresh list
+            return render_template('custom_game.html', success=False)
+
+        # add a question
         q = {
             "category": "Custom",
             "prompt": request.form['prompt'],
@@ -79,14 +87,12 @@ def custom_game():
             "answer": int(request.form['correct'])
         }
 
-        # store in memory for now
         custom_qs = session.get('custom_questions', [])
         custom_qs.append(q)
         session['custom_questions'] = custom_qs
 
-        # re-render template with success flag
         return render_template('custom_game.html', success=True)
-    
+
     return render_template('custom_game.html', success=False)
 
 @app.route('/results')

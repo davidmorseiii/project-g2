@@ -16,6 +16,17 @@
         </div>
         {% endif %}
 
+        {% if not session.get('custom_set_name') %}
+        <h2>Name Your Question Set</h2>
+        <form method="POST">
+            <label for="set_name">Question Set Name</label>
+            <input type="text" id="set_name" name="set_name" required>
+            <button type="submit">Start Creating</button>
+        </form>
+        {% else %}
+        <h2>Set Name: {{ session['custom_set_name'] }}</h2>
+        <h3>Add a Question</h3>
+
         <form method="POST" class="custom-form">
             <label for="prompt">Question Prompt</label>
             <textarea id="prompt" name="prompt" required rows="3"></textarea>
@@ -47,6 +58,10 @@
             <button type="submit">Back to Home</button>
         </form>
         <button id="modeToggle">Toggle Night/Day Mode</button>
+        <form method="post" action="/custom?reset=true">
+            <button type="submit">Start Over</button>
+        </form>
+        {% endif %}
     </div>
     <script>
         const toggleBtn = document.getElementById('modeToggle');
