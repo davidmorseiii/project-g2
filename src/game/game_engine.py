@@ -35,13 +35,13 @@ class GameEngine:
         """
         current_question = self.get_current_question()
         if current_question is None:
-            return False  # No question to answer
+            return False  # no question to answer
 
         is_correct = current_question.is_correct(answer_index)
         if is_correct:
             self.score += 1
 
-        self.current_index += 1  # Move to next question
+        self.current_index += 1  # move to next question
         return is_correct
 
     def get_score(self):
@@ -59,7 +59,7 @@ class GameEngine:
 
 
     def load_questions_json(self):
-        #more intelligent way to load questions
+        # more intelligent way to load questions
 
         paths_to_try = ["QuestionRepository.json", "game/QuestionRepository.json", "src/game/QuestionRepository.json"]
 

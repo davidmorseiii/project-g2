@@ -20,8 +20,6 @@ def display_question():
     engine.current_index = current_question
     engine.score = player_score
     question = engine.get_current_question()
-    
-
 
     if request.method == 'POST':
         selected = int(request.form.get("answer"))
@@ -41,8 +39,6 @@ def display_question():
         question = engine.get_current_question()
     else:
         return render_template("results.html", player_score=player_score)
-
-        
 
     return render_template(
         "start.html",
