@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect
 from game.game_engine import GameEngine
 
 app = Flask(__name__)
@@ -10,13 +10,6 @@ def home():
 
 @app.route('/start', methods=['GET', 'POST'])
 def display_question():
-    #placeholder question until we load from engine
-    
-      # Load questions from JSON file
-    question = {
-        "prompt": "What is the capital of France?",
-        "options": ["Berlin", "Madrid", "Paris", "Rome"]
-    }
 
     feedback = None
     player_score = int(request.form.get("current_score", 0))
@@ -27,20 +20,17 @@ def display_question():
     engine.current_index = current_question
     engine.score = player_score
     question = engine.get_current_question()
-    
-
 
     if request.method == 'POST':
         selected = int(request.form.get("answer"))
 
         print(question.is_correct(selected))
         
-        # correct_answer = 2 #Paris
         if selected and question.is_correct(selected):
             feedback = { "correct": True, "message": "Correct!" }
             player_score += 1
         else:
-            feedback = { "correct": False, "message": "Wrong! Try again." }
+            feedback = { "correct": False, "message": "Wrong!" }
         current_question += 1
         engine.current_index = current_question
         
@@ -49,8 +39,6 @@ def display_question():
         question = engine.get_current_question()
     else:
         return render_template("results.html", player_score=player_score)
-
-        
 
     return render_template(
         "start.html",
@@ -62,11 +50,19 @@ def display_question():
 
 @app.route('/custom', methods=['GET', 'POST'])
 def custom_game():
-    """
-    In memory collector for custom questions.
-    Session list to be replaced with SQLite persistence later.
-    """
+    if request.args.get('reset') == 'true':
+        session.pop('custom_set_name', None)
+        session.pop('custom_questions', None)
+        return render_template('custom_game.html', success=False)
+
     if request.method == 'POST':
+        # name the set if not done yet
+        if 'set_name' in request.form:
+            session['custom_set_name'] = request.form['set_name']
+            session['custom_questions'] = []  # Initialize fresh list
+            return render_template('custom_game.html', success=False)
+        
+        # add a question
         q = {
             "category": "Custom",
             "prompt": request.form['prompt'],
@@ -79,19 +75,74 @@ def custom_game():
             "answer": int(request.form['correct'])
         }
 
-        # store in memory for now
         custom_qs = session.get('custom_questions', [])
         custom_qs.append(q)
         session['custom_questions'] = custom_qs
 
-        # re-render template with success flag
+        custom_sets = session.get('all_custom_sets', {})
+        set_name = session['custom_set_name']
+        custom_sets[set_name] = custom_qs
+        session['all_custom_sets'] = custom_sets
+
         return render_template('custom_game.html', success=True)
-    
+
     return render_template('custom_game.html', success=False)
 
 @app.route('/results')
 def results():
     return render_template("results.html", player_score=0)
+
+@app.route('/custom-game-play', methods=['GET', 'POST'])
+def custom_game_play():
+    questions = session.get('custom_game_questions', [])
+    index = session.get('custom_current_index', 0)
+    score = session.get('custom_score', 0)
+
+    if index >= len(questions):
+        return render_template('results.html', player_score=score)
+
+    current_question = questions[index]
+    feedback = None
+
+    if request.method == 'POST':
+        selected = int(request.form.get("answer", -1))
+        if selected == current_question['answer']:
+            feedback = {"correct": True, "message": "Correct!"}
+            score += 1
+        else:
+            feedback = {"correct": False, "message": "Wrong!"}
+
+        index += 1
+        session['custom_current_index'] = index
+        session['custom_score'] = score
+
+        if index >= len(questions):
+            return render_template('results.html', player_score=score)
+        current_question = questions[index]
+
+    return render_template("start.html", question=current_question, feedback=feedback,
+                           player_score=score, current_question=index)
+
+@app.route('/start-custom', methods=['POST'])
+def start_custom():
+    set_name = request.form['set_choice']
+    sets = session.get('all_custom_sets', {})
+    questions = sets.get(set_name)
+
+    if not questions:
+        return "Set not found or empty", 400
+
+    session['current_custom_set'] = set_name
+    session['custom_game_questions'] = questions
+    session['custom_current_index'] = 0
+    session['custom_score'] = 0
+
+    return redirect('/custom-game-play')
+
+@app.route('/custom-sets', methods=['GET'])
+def custom_sets():
+    sets = session.get('all_custom_sets', {})
+    return render_template('choose_custom_set.html', sets=sets.keys())
 
 if __name__ == '__main__':
     app.run(debug=True)
