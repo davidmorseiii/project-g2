@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Choose Custom Set</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="game-container">
+        <h1><u>Choose a Custom Set</u></h1>
+
+        {% if sets %}
+        <form method="post" action="/start-custom">
+            <label for="set_choice">Select a set to play:</label>
+            <select name="set_choice" id="set_choice" required>
+                {% for set_name in sets %}
+                <option value="{{ set_name }}">{{ set_name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Start Game</button>
+        </form>
+        {% else %}
+        <p>No custom sets found. Create one first!</p>
+        {% endif %}
+
+        <form action="/" method="get">
+            <button type="submit">Back to Home</button>
+        </form>
+    </div>
+</body>
+</html>
