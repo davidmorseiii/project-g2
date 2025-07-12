@@ -7,6 +7,10 @@ app.secret_key = "dev.secret" # this is needed for session storage
 @app.route('/')
 def home():
     return render_template("index.html")
+    
+@app.route('/scoreboard')
+def scoreboard():
+    return render_template("scoreboard.html")
 
 @app.route('/start', methods=['GET', 'POST'])
 def display_question():
