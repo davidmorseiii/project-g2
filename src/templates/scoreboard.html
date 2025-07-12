@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scoreboard</title>
+    <!--<link rel="stylesheet" href="../static/style.css">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+  <body>
+    <div>
+        <h1>Scoreboard</h1>
+    </div>
+    <div class="menu-box">
+          <h1>Player 1</h1>
+          <h1>Player 2</h1>
+          <h1>Player 3</h1>
+          <h1>Player 4</h1>
+          <h1>Player 5</h1>
+          <h1>Player 6</h1>
+        </div>
+        <button id="modeToggle">Toggle Night/Day Mode</button>
+
+    <script>
+        const toggleBtn = document.getElementById('modeToggle');
+
+        // load saved mode from localStorage
+        const savedMode = localStorage.getItem('theme');
+        if (savedMode === 'night') {
+            document.body.classList.add('night-mode');
+            toggleBtn.textContent = 'Switch to Day Mode';
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('night-mode');
+            
+            const isNight = document.body.classList.contains('night-mode');
+            localStorage.setItem('theme', isNight ? 'night' : 'day');
+
+            toggleBtn.textContent = isNight 
+                ? 'Switch to Day Mode' 
+                : 'Switch to Night Mode';
+        });
+    </script>
+</body>
+</html>
