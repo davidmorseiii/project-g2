@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, session, redirect
+from flask.views import MethodView
 from game.game_engine import GameEngine
 
 app = Flask(__name__)
 app.secret_key = "dev.secret" # this is needed for session storage
+
 
 @app.route('/')
 def home():
@@ -37,7 +39,6 @@ def display_question():
             feedback = { "correct": False, "message": "Wrong!" }
         current_question += 1
         engine.current_index = current_question
-        
     
     if engine.has_more_questions():
         question = engine.get_current_question()
