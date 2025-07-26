@@ -1,16 +1,29 @@
 from flask import Flask, render_template, request, session, redirect
+from flask.views import MethodView
 from game.game_engine import GameEngine
+from models import db, User, QuestionSet, Question, GameResult
+
 
 app = Flask(__name__)
-app.secret_key = "dev.secret" # this is needed for session storage
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///game.db'  # Moved above init_app
+app.secret_key = "dev.secret"  # Needed for session storage
+
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
 
 @app.route('/')
 def home():
     return render_template("index.html")
+
     
 @app.route('/scoreboard')
 def scoreboard():
-    return render_template("scoreboard.html")
+    games = GameResult.query.order_by(GameResult.score.desc()).all()
+    print(games)
+    return render_template("scoreboard.html", games=games)
+    
 
 @app.route('/start', methods=['GET', 'POST'])
 def display_question():
@@ -37,7 +50,6 @@ def display_question():
             feedback = { "correct": False, "message": "Wrong!" }
         current_question += 1
         engine.current_index = current_question
-        
     
     if engine.has_more_questions():
         question = engine.get_current_question()
@@ -149,4 +161,4 @@ def custom_sets():
     return render_template('choose_custom_set.html', sets=sets.keys())
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
