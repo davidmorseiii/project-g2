@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #2b414f;
-    color: white;
+    color: rgb(0, 0, 0);
     text-align: center;
     margin: 0;
     padding: 0;
@@ -116,4 +116,52 @@ body.night-mode .scoreboard {
 body.night-mode button[type="submit"] {
     background-color: #333;
     color: #fff;
+}
+
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+    font-size: 1rem;
+    font-family: sans-serif;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.styled-table thead {
+    background-color: #f8f9fa;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f2f2f2;
+}
+
+.styled-table tbody tr:hover {
+    background-color: #e9ecef;
+    transition: background-color 0.2s ease;
+}
+
+body.night-mode .styled-table thead {
+    background-color: #2c2c2c;
+    color: #ffffff;
+}
+
+body.night-mode .styled-table tbody tr {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+body.night-mode .styled-table tbody tr:nth-of-type(even) {
+    background-color: #2a2a2a;
+}
+
+body.night-mode .styled-table tbody tr:hover {
+    background-color: #3a3a3a;
 }

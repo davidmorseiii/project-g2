@@ -35,3 +35,5 @@ class GameResult(db.Model):
     user_id = db.Column(db.Integer, ForeignKey("user.id"))
     set_id = db.Column(db.Integer, ForeignKey("question_set.id"))
     score = db.Column(db.Integer, nullable=False)
+    question_set = relationship("QuestionSet", backref="game_results")
+

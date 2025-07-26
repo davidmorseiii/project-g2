@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, session, redirect
 from flask.views import MethodView
 from game.game_engine import GameEngine
-from models import db
+from models import db, User, QuestionSet, Question, GameResult
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///game.db'  # Moved above init_app
@@ -19,7 +20,10 @@ def home():
     
 @app.route('/scoreboard')
 def scoreboard():
-    return render_template("scoreboard.html")
+    games = GameResult.query.order_by(GameResult.score.desc()).all()
+    print(games)
+    return render_template("scoreboard.html", games=games)
+    
 
 @app.route('/start', methods=['GET', 'POST'])
 def display_question():
@@ -157,4 +161,4 @@ def custom_sets():
     return render_template('choose_custom_set.html', sets=sets.keys())
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
