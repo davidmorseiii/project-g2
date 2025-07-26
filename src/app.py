@@ -1,14 +1,21 @@
 from flask import Flask, render_template, request, session, redirect
 from flask.views import MethodView
 from game.game_engine import GameEngine
+from models import db
 
 app = Flask(__name__)
-app.secret_key = "dev.secret" # this is needed for session storage
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///game.db'  # Moved above init_app
+app.secret_key = "dev.secret"  # Needed for session storage
 
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
 
 @app.route('/')
 def home():
     return render_template("index.html")
+
     
 @app.route('/scoreboard')
 def scoreboard():
