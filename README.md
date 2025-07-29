@@ -1,49 +1,73 @@
-# Project-G2 Trivia CLI Game
+# Group 2 Trivia Game Web App
 
-## Overview
 Our Trivia Game is a Python-based trivia application that started as a command-line (CLI) game and is evolving into a web-based GUI version using Flask. The game quizzes the player with multiple-choice questions pulled from a JSON file, tracks the score, and presents results. The project uses a modular structure and supports expansion to multiplayer, persistent storage, and leaderboard features.
 
+---
+
 ## Features
-- Loads questions dynamically from a JSON file
+
 - CLI version for terminal gameplay
 - Web-based GUI built with Flask and HTML templates
-- Real-time scoring and feedback
-- Final results screen
-- Modular structure ready for future features:
-    - Multiplayer support
-    - Leaderboards
-    - Timed rounds
-    - Difficulty filtering
+- Start a trivia game with a bank of built-in questions
+- Create custom question sets directly from the UI
+- Play previously created custom question sets
+- Score is tracked live during gameplay
+- View a scoreboard (planned extension with persistent database)
+- Toggle between light and dark modes
 
-## Requirements
-- Python 3.8 or higher
-- Flask 2.0 or higher (for GUI version)
-- Web browser (for GUI version)
+---
 
-## File Structure
-- `app.py` – Main Flask application and route controller
-- `question.py` – Defines the `Question` class
-- `game_engine.py` – Game logic, state handling, and score tracking
-- `test_app.py` – Prototype web app and discovery
-- `cli_interface.py` – CLI input/output logic for terminal-based gameplay
-- `question_repository.py` – Loads and parses trivia questions from a JSON file
-- `templates/` - HTML templates for the web GUI
-    - `index.html` – Home screen UI
-    - `start.html` – Main game interface
-    - `game_over.html` – Final score screen
-- `static/style.css` - Basic styles used by the GUI
-- `questions.json` – Sample JSON dataset used by the game
-- `tests/` – Unit tests for all modules
-- `README.txt` – This file
+## Project Structure
+
+```
+project-g2-main/
+├── src/
+│   ├── app.py               # Flask app and route controller
+│   ├── config.py            # Configuration for database paths and Flask
+│   ├── models.py            # SQLAlchemy models for users, scores, etc.
+│   ├── templates/           # HTML templates (Jinja2)
+│   │   ├── index.html
+│   │   ├── start.html
+│   │   ├── results.html
+│   │   ├── custom_game.html
+│   │   ├── choose_custom_set.html
+│   ├── static/
+│   │   └── style.css        # Shared CSS styling
+│   └── game/
+│       ├── game_engine.py   # Core game logic
+│       ├── question.py      # Question class definition
+│       └── QuestionRepository.json  # Sample questions
+├── instance/
+│   └── game.db              # SQLite database (used for scores and users)
+├── requirements.txt         # Python dependencies
+└── README.md                # This file
+```
+
+---
 
 ## Wireframe Design Link:
+
 - https://www.figma.com/design/JLD2Cb2vKWvtKR6VViuSk9/Figma-basics?node-id=1669-162202&t=NEpK1vVYwpfzj5np-1
 
+---
+
 ## Project management link
+
 - [Taiga Link](https://taiga.luke-merrill.com/project/project-g2/backlog)
 - [unit_test_spreadsheet](https://docs.google.com/spreadsheets/d/1E8BiflJdZtr32lMwURZAU-tqDZDZ60ykgGHYlUxTroA/edit?gid=0#gid=0)
 
-### 1. Clone the Repository
+---
+
+## Requirements
+
+- Python 3.8 or higher
+- Web browser (for GUI version)
+
+---
+
+## Getting Started
+
+### 1. Clone the repository
 ```bash
 git clone https://github.com/davidmorseiii/project-g2.git
 ```
@@ -54,14 +78,13 @@ cd project-g2
 cd src
 ```
 
-### 3. (Recommended) Create a virtual environment
+### 3. Create a virtual environment (Recommended)
 
-#### On macOS/Linux:
+#### On MacOS/Linux:
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
-
 #### On Windows:
 ```cmd
 python -m venv venv
@@ -73,14 +96,47 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 5. Run the Program
-For CLI version:
+### 5. Run the program
+
+#### CLI version:
 ```bash
 python main.py
 ```
-For Web GUI version:
+#### Web GUI version:
 ```bash
 python app.py
 ```
 
-**Note:** You must have Python installed on your computer. If you do not have a `requirements.txt` file, you can skip step 4. The GUI will be accessible at http://localhost:5000 after running app.py.
+**Note:** You must have Python installed on your computer. The GUI will be accessible at http://127.0.0.1:5001 in your browser.
+
+---
+
+## How to Play
+
+### Default Game
+1. Click "Start" on the home page
+2. Answer multiple-choice questions
+3. See your final score at the end
+
+### Custom Game
+1. Click "Create Custom Game"
+2. Name your question set
+3. Add questions with prompts, options, and correct answer
+4. Go back to the home page and click "Play Custom Game"
+5. Select your set and play
+
+---
+
+## Future Improvements
+
+- Persistent user accounts and authentication
+- Saving custom sets and scores to the database
+- Enhanced leaderboard
+- Question categories and difficulty levels
+
+## Technologies Used
+
+- Python 3
+- Flask
+- HTML5, CSS3
+- SQLite (via SQLAlchemy)
