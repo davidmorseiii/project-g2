@@ -25,9 +25,9 @@
             <tbody>
                 {% for game in games %}
                 <tr>
-                    <td>{{ game.user.username }}</td>
+                    <td>{{ game.player }}</td>
                     <td>{{ game.score }}</td>
-                    <td>{{ game.question_set.title }}</td>
+                    <td>{{ game.game }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
