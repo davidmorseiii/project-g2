@@ -28,38 +28,58 @@
         <h3>Add a Question</h3>
 
         <form method="POST" class="custom-form">
-            <label for="prompt">Question Prompt</label>
-            <textarea id="prompt" name="prompt" required rows="3"></textarea>
+            <div class="form-group">
+                <label for="prompt">Question Prompt</label>
+                <textarea id="prompt" name="prompt" required rows="1"></textarea>
+            </div>
 
-            <label for="option_a">Option A</label>
-            <input id="option_a" name="option_a" type="text" required>
+            <div class="form-group">
+                <label for="option_a">Option A</label>
+                <input id="option_a" name="option_a" type="text" required>
+            </div>
+            <div class="form-group">
+                <label for="option_b">Option B</label>
+                <input id="option_b" name="option_b" type="text" required>
+            </div>
+            <div class="form-group">
+                <label for="option_c">Option C</label>
+                <input id="option_c" name="option_c" type="text" required>
+            </div>
+            <div class="form-group">
+                <label for="option_d">Option D</label>
+                <input id="option_d" name="option_d" type="text" required>
+            </div>
 
-            <label for="option_b">Option B</label>
-            <input id="option_b" name="option_b" type="text" required>
+            <div class="form-group">
+                <label>Correct Answer</label>
+                <div class="radio-options">
+                    <label><input type="radio" name="correct" value="0" required> A</label>
+                    <label><input type="radio" name="correct" value="1"> B</label>
+                    <label><input type="radio" name="correct" value="2"> C</label>
+                    <label><input type="radio" name="correct" value="3"> D</label>
+                </div>
+            </div>
 
-            <label for="option_c">Option C</label>
-            <input id="option_c" name="option_c" type="text" required>
-
-            <label for="option_d">Option D</label>
-            <input id="option_d" name="option_d" type="text" required>
-
-            <label for="correct">Correct Answer</label>
-            <select id="correct" name="correct" required>
-                <option value="0">A</option>
-                <option value="1">B</option>
-                <option value="2">C</option>
-                <option value="3">D</option>
-            </select>
-
-            <button type="submit">Save Question</button>
+            <div class="form-actions">
+                <button type="submit" class="primary-btn">Save Question</button>
+            </div>
         </form>
-        <form action="/" method="get">
-            <button type="submit">Back to Home</button>
-        </form>
-        <form method="post" action="/custom?reset=true">
-            <button type="submit">Start Over</button>
-        </form>        
-        <button id="modeToggle">Toggle Night/Day Mode</button>
+
+        <div class="form-actions">
+            <form action="/" method="get">
+                <button type="submit">Back to Home</button>
+            </form>
+        </div>
+
+        <div class="form-actions">
+            <form method="post" action="/custom?reset=true">
+                <button type="submit">Start Over</button>
+            </form>
+        </div>
+        <div class="form-actions">
+            <button id="modeToggle">Toggle Night/Day Mode</button>
+        </div>       
+        
         {% endif %}
     </div>
     <script>
