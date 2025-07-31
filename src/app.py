@@ -36,6 +36,7 @@ def display_question():
     start.html. If not, it renders the final results via results.html.
     """
 
+    session.pop('current_custom_set', None) # clear any leftover custom set name from previous games
     feedback = None
     player_score = int(request.form.get("current_score", 0))
     current_question = int(request.form.get("current_question", 0))
