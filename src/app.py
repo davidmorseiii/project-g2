@@ -105,7 +105,7 @@ def custom_game():
     if request.args.get('reset') == 'true':
         session.pop('custom_set_name', None)
         session.pop('custom_questions', None)
-        return render_template('custom_game.html', success=False)
+        return render_template('index.html', success=False)
 
     if request.method == 'POST':
         # name the set if not done yet
