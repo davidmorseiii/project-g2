@@ -27,6 +27,22 @@ def scoreboard():
 
 @app.route('/start', methods=['GET', 'POST'])
 def display_question():
+    """
+    Handles the main quiz gameplay route.
+    
+    On GET: Initializes a new game round by creating a GameEngine instance, 
+    loading all questions from the JSON repository, resetting the game state 
+    (score = 0, question index = 0), and fetching the first question.
+
+    On POST: Processes the submitted answer by reading the selected option 
+    from the form, checking its correctness using Question.is_correct(), 
+    and updating the score and question index accordingly. Provides feedback 
+    ("Correct!" or "Wrong!") for display.
+
+    After processing, the route checks if more questions remain using 
+    engine.has_more_questions(). If so, it renders the next question via 
+    start.html. If not, it renders the final results via results.html.
+    """
 
     feedback = None
     player_score = int(request.form.get("current_score", 0))
@@ -66,6 +82,26 @@ def display_question():
 
 @app.route('/custom', methods=['GET', 'POST'])
 def custom_game():
+    """
+    Manages the creation of custom question sets via a form, using session storage.
+
+    On GET: Renders the custom_game.html page. If the query parameter `reset=true` is present, 
+    the route clears any in-progress custom set from the session (removes 'custom_set_name' 
+    and 'custom_questions') to start fresh. Otherwise, it simply displays the form.
+
+    On POST:
+    If the form includes a `set_name` field, it indicates the start of a new custom set. 
+    The route stores the set name in the session, initializes an empty list for questions, 
+    and re-renders the form with success=False.
+    If the form includes question fields but no `set_name`, it processes a new question submission. 
+    A dictionary containing the question prompt, options, and correct answer index is created 
+    and appended to the session's 'custom_questions' list. This list is also saved under the 
+    session's 'all_custom_sets' dictionary, keyed by the set name.
+
+    After handling the submission, the form is re-rendered with a success flag to show confirmation, 
+    allowing the user to add more questions.
+    """
+
     if request.args.get('reset') == 'true':
         session.pop('custom_set_name', None)
         session.pop('custom_questions', None)
@@ -110,6 +146,21 @@ def results():
 
 @app.route('/custom-game-play', methods=['GET', 'POST'])
 def custom_game_play():
+    """
+    Implements the gameplay loop for a custom question set, similar to the /start route for the default game.
+
+    On each request, retrieves the current question list, index, and score from the session.
+
+    On GET: If there are questions remaining, renders the current question using the shared start.html template.
+    On POST: Compares the submitted answer index directly to the stored correct answer index from the current question 
+    (a plain dictionary from the session). Updates the score and index accordingly, and prepares a feedback message 
+    ("Correct!" or "Wrong!"). Then:
+        If all questions have been answered, renders the results.html page with the final score.
+        Otherwise, renders the next question via start.html with updated feedback and score.
+
+    This loop continues until all questions in the custom set have been completed.
+    """
+
     questions = session.get('custom_game_questions', [])
     index = session.get('custom_current_index', 0)
     score = session.get('custom_score', 0)
@@ -141,6 +192,17 @@ def custom_game_play():
 
 @app.route('/start-custom', methods=['POST'])
 def start_custom():
+    """
+    Handles submission of the selected custom question set (via POST).
+
+    Looks up the chosen set name from the form in session['all_custom_sets'] and retrieves 
+    the corresponding list of questions. Initializes gameplay state in the session by setting 
+    the selected set name, loading the questions into 'custom_game_questions', and resetting 
+    'custom_current_index' and 'custom_score' to 0.
+
+    Finally, redirects the user to the /custom-game-play route to begin the quiz.
+    """
+
     set_name = request.form['set_choice']
     sets = session.get('all_custom_sets', {})
     questions = sets.get(set_name)
@@ -157,6 +219,15 @@ def start_custom():
 
 @app.route('/custom-sets', methods=['GET'])
 def custom_sets():
+    """
+    Presents a page (choose_custom_set.html) where the user can select one of the saved custom 
+    question sets to play.
+
+    Retrieves the keys from session['all_custom_sets'] (the names of saved sets) 
+    and passes them to the template to populate a dropdown menu. If no custom sets are found, 
+    the template displays a message indicating that no sets are currently available.
+    """
+    
     sets = session.get('all_custom_sets', {})
     return render_template('choose_custom_set.html', sets=sets.keys())
 
