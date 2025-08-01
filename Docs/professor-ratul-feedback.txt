@@ -1,0 +1,4 @@
+- Need releases for every milestone
+- Update UML Diagram
+- Add screenshot of project to README
+- Add docstrings for all classes and functions
