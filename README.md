@@ -54,6 +54,8 @@ project-g2-main/
 ## Project management link
 
 - [Taiga Link](https://taiga.luke-merrill.com/project/project-g2/backlog)
+<img width="512" height="164" alt="wireframe" src="https://github.com/user-attachments/assets/65118b74-14ef-4e28-808a-b75358da5d86" />
+
 - [unit_test_spreadsheet](https://docs.google.com/spreadsheets/d/1E8BiflJdZtr32lMwURZAU-tqDZDZ60ykgGHYlUxTroA/edit?gid=0#gid=0)
 
 ---
