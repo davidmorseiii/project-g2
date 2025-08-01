@@ -1,4 +1,5 @@
 # Group 2 Trivia Game Web App
+<img width="512" height="372" alt="Trivia Game" src="https://github.com/user-attachments/assets/e4376077-8f6a-40c6-bb33-6f29b32241d6" />
 
 Our Trivia Game is a Python-based trivia application that started as a command-line (CLI) game and is evolving into a web-based GUI version using Flask. The game quizzes the player with multiple-choice questions pulled from a JSON file, tracks the score, and presents results. The project uses a modular structure and supports expansion to multiplayer, persistent storage, and leaderboard features.
 
