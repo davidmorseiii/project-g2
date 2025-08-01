@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter Name</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="game-container">
+        <h1><u>Enter Your Name</u></h1>
+        <form method="post">
+            <label for="player_name">Name:</label>
+            <input type="text" name="player_name" id="player_name" required>
+            <p>Which game would you like to play?</p>
+            <button type="submit" name="game_type" value="default">Default Game</button>
+            <button type="submit" name="game_type" value="custom">Custom Game</button>
+        </form>
+    </div>
+</body>
+</html>
