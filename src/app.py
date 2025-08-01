@@ -17,14 +17,6 @@ with app.app_context():
 def home():
     return render_template("index.html")
 
-    
-@app.route('/scoreboard')
-def scoreboard():
-    games = GameResult.query.order_by(GameResult.score.desc()).all()
-    print(games)
-    return render_template("scoreboard.html", games=games)
-    
-
 @app.route('/start', methods=['GET', 'POST'])
 def display_question():
     """
@@ -44,6 +36,7 @@ def display_question():
     start.html. If not, it renders the final results via results.html.
     """
 
+    session.pop('current_custom_set', None) # clear any leftover custom set name from previous games
     feedback = None
     player_score = int(request.form.get("current_score", 0))
     current_question = int(request.form.get("current_question", 0))
@@ -70,6 +63,15 @@ def display_question():
     if engine.has_more_questions():
         question = engine.get_current_question()
     else:
+        # Stores score in memory before rendering results.html
+        local_scores = session.get('local_scores', [])
+        local_scores.append({
+            "player": session.get('player_name', 'Anonymous'),
+            "score": player_score,
+            "game": session.get('current_custom_set', 'Default')
+        })
+        session['local_scores'] = local_scores
+
         return render_template("results.html", player_score=player_score)
 
     return render_template(
@@ -79,6 +81,19 @@ def display_question():
         player_score=player_score,
         current_question=current_question,
     )
+
+@app.route('/enter-name', methods=['GET', 'POST'])
+def enter_name():
+    if request.method == 'POST':
+        session['player_name'] = request.form['player_name']
+        game_type = request.form['game_type']
+
+        if game_type == 'default':
+            return redirect('/start')
+        elif game_type == 'custom':
+            return redirect('/custom-sets')
+        
+    return render_template('enter_name.html')
 
 @app.route('/custom', methods=['GET', 'POST'])
 def custom_game():
@@ -105,7 +120,7 @@ def custom_game():
     if request.args.get('reset') == 'true':
         session.pop('custom_set_name', None)
         session.pop('custom_questions', None)
-        return render_template('custom_game.html', success=False)
+        return render_template('index.html', success=False)
 
     if request.method == 'POST':
         # name the set if not done yet
@@ -184,11 +199,33 @@ def custom_game_play():
         session['custom_score'] = score
 
         if index >= len(questions):
+            # Stores score in memory before rendering results.html
+            local_scores = session.get('local_scores', [])
+            local_scores.append({
+                "player": session.get('player_name', 'Anonymous'),
+                "score": score,
+                "game": session.get('current_custom_set', 'Default')
+            })
+            session['local_scores'] = local_scores
             return render_template('results.html', player_score=score)
+        
         current_question = questions[index]
 
-    return render_template("start.html", question=current_question, feedback=feedback,
-                           player_score=score, current_question=index)
+    return render_template(
+        "start.html",
+        question=current_question,
+        feedback=feedback,
+        player_score=score,
+        current_question=index,
+    )
+
+@app.route('/scoreboard')
+def scoreboard():
+    games = session.get('local_scores', [])
+    return render_template("scoreboard.html", games=games)
+
+    #games = GameResult.query.order_by(GameResult.score.desc()).all()
+    #print(games)
 
 @app.route('/start-custom', methods=['POST'])
 def start_custom():

@@ -25,14 +25,17 @@
             <tbody>
                 {% for game in games %}
                 <tr>
-                    <td>{{ game.user.username }}</td>
+                    <td>{{ game.player }}</td>
                     <td>{{ game.score }}</td>
-                    <td>{{ game.question_set.title }}</td>
+                    <td>{{ game.game }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
 
+        <form action="/" method="get">
+            <button type="submit">Back to Home</button>
+        </form>
 
     </div>
     <button id="modeToggle">Toggle Night/Day Mode</button>
