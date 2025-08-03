@@ -58,13 +58,13 @@ project-g2-main/
 
 - [Design File](https://github.com/davidmorseiii/project-g2/blob/main/Docs/Design%20file.png)
 
+- [Launch plan](https://github.com/davidmorseiii/project-g2/blob/main/Docs/project-launch.md)
+
 - [Taiga Link](https://taiga.luke-merrill.com/project/project-g2/backlog)
 
 - [unit_test_spreadsheet](https://docs.google.com/spreadsheets/d/1E8BiflJdZtr32lMwURZAU-tqDZDZ60ykgGHYlUxTroA/edit?gid=0#gid=0)
 
 - [Code Inspection Checklist](https://github.com/davidmorseiii/project-g2/blob/main/Docs/code_inspection_checklist.md)
-
-- [Launch plan](https://github.com/davidmorseiii/project-g2/blob/main/Docs/project-launch.md)
 
 - [Proof of Tests](https://github.com/davidmorseiii/project-g2/blob/main/Docs/Proof%20of%20tests%20running.png)
 ---
