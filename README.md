@@ -43,6 +43,7 @@ project-g2-main/
 ├── requirements.txt         # Python dependencies
 └── README.md                # This file
 ```
+<img width="683" height="499" alt="Screenshot 2025-08-02 233704" src="https://github.com/user-attachments/assets/9df2fbbe-e9fe-4d83-80f4-1008e271340f" />
 
 ---
 
