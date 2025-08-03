@@ -61,6 +61,8 @@ project-g2-main/
 - [Launch plan](https://github.com/davidmorseiii/project-g2/blob/main/Docs/project-launch.md)
 
 - [Taiga Link](https://taiga.luke-merrill.com/project/project-g2/backlog)
+  
+- [Taiga Screenshot](https://github.com/davidmorseiii/project-g2/blob/main/Docs/Taiga.png) [Zenhub Screenshot](https://github.com/davidmorseiii/project-g2/blob/main/Docs/Zenhub%20screenshot.png)
 
 - [unit_test_spreadsheet](https://docs.google.com/spreadsheets/d/1E8BiflJdZtr32lMwURZAU-tqDZDZ60ykgGHYlUxTroA/edit?gid=0#gid=0)
 
