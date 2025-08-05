@@ -1,9 +1,14 @@
+<!--
+This is where the magic happens. Player is directed here from enter_name.html. Player is given questions from
+either QuestionRepository.json, or saved set in browser's memory, until no questions remain. Real time scores
+are displayed after each question.
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Trivia Game</title>
-    <!--<link rel="stylesheet" href="../static/style.css">-->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="darkmode.css">
 </head>
