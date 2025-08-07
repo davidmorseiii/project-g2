@@ -13,9 +13,51 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
+@app.before_request
+def require_player_name():
+    # List of routes to exclude from the check (and static files)
+    exempt_routes = ['enter_name', 'static']
+
+    # Skip check for exempt routes and static files
+    if request.endpoint in exempt_routes or request.endpoint is None:
+        return
+
+    # Redirect to /enter-name if 'player_name' not in session
+    if 'player_name' not in session:
+        session['next'] = request.path  # Save where the user was going
+        return redirect('/enter-name')
+
+
 @app.route('/')
 def home():
     return render_template("index.html")
+
+@app.route('/scoreboard')
+def scoreboard():
+    games = GameResult.query.order_by(GameResult.score.desc()).all()
+    print(games)
+    return render_template("scoreboard.html", games=games)
+
+
+@app.route('/enter-name', methods=['GET', 'POST'])
+def enter_name():
+    if request.method == 'POST':
+        session['player_name'] = request.form['player_name']
+        game_type = request.form['game_type']
+        #look up if a user with this name exists, if not create one
+        user = User.query.filter_by(username=session['player_name']).first()
+        if not user:
+            user = User(username=session['player_name'])
+            db.session.add(user)
+            db.session.commit()
+
+        if game_type == 'default':
+            return redirect('/start')
+        elif game_type == 'custom':
+            return redirect('/custom-sets')
+        
+    return render_template('enter_name.html')
+
 
 @app.route('/start', methods=['GET', 'POST'])
 def display_question():
@@ -64,6 +106,12 @@ def display_question():
         question = engine.get_current_question()
     else:
         # Stores score in memory before rendering results.html
+        db.session.add(GameResult(
+            user_id=session.get('user_id', 1),  # Default to user_id 1 if not set
+            set_id=1,  # Default set_id, adjust as needed
+            score=player_score
+        ))
+        db.session.commit()
         local_scores = session.get('local_scores', [])
         local_scores.append({
             "player": session.get('player_name', 'Anonymous'),
@@ -82,18 +130,8 @@ def display_question():
         current_question=current_question,
     )
 
-@app.route('/enter-name', methods=['GET', 'POST'])
-def enter_name():
-    if request.method == 'POST':
-        session['player_name'] = request.form['player_name']
-        game_type = request.form['game_type']
 
-        if game_type == 'default':
-            return redirect('/start')
-        elif game_type == 'custom':
-            return redirect('/custom-sets')
-        
-    return render_template('enter_name.html')
+
 
 @app.route('/custom', methods=['GET', 'POST'])
 def custom_game():
@@ -219,13 +257,13 @@ def custom_game_play():
         current_question=index,
     )
 
-@app.route('/scoreboard')
-def scoreboard():
-    games = session.get('local_scores', [])
-    return render_template("scoreboard.html", games=games)
+# @app.route('/scoreboard')
+# def scoreboard():
+#     games = session.get('local_scores', [])
+#     return render_template("scoreboard.html", games=games)
 
-    #games = GameResult.query.order_by(GameResult.score.desc()).all()
-    #print(games)
+#     #games = GameResult.query.order_by(GameResult.score.desc()).all()
+#     #print(games)
 
 @app.route('/start-custom', methods=['POST'])
 def start_custom():

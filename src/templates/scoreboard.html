@@ -29,9 +29,9 @@ browser's memory.
             <tbody>
                 {% for game in games %}
                 <tr>
-                    <td>{{ game.player }}</td>
+                    <td>{{ game.user.username }}</td>
                     <td>{{ game.score }}</td>
-                    <td>{{ game.game }}</td>
+                    <td>{{ game.question_set.title }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
