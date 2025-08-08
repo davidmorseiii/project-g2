@@ -6,6 +6,7 @@ class GameEngine:
     def __init__(self):
         """
         Initialize game engine with a list of Question objects.
+        Sets up an empty question list, current index, and score.
         """
         self.questions = []
         self.current_index = 0
@@ -56,20 +57,27 @@ class GameEngine:
         """
         return len(self.questions)
     
-
-
     def load_questions_json(self):
-        # more intelligent way to load questions
-
-        paths_to_try = ["QuestionRepository.json", "game/QuestionRepository.json", "src/game/QuestionRepository.json"]
+        """
+        Loads questions from a JSON file.
+        Tries several possible paths for the question repository file.
+        Populates self.questions with Question objects.
+        Raises FileNotFoundError if no file is found.
+        """
+        paths_to_try = [
+            "QuestionRepository.json", 
+            "game/QuestionRepository.json", 
+            "src/game/QuestionRepository.json"
+        ]
 
         for path in paths_to_try:
             if os.path.exists(path):
                 with open(path, "r") as f:
                     data = json.load(f)
-                    self.questions = [Question(q) for q in data]
+                    self.questions = [Question(q) for q in data]  # Create Question objects from JSON
                 return
 
+        # If no file found, raise error
         raise FileNotFoundError("QuestionRepository.json not found in either location.")
 
-    
+
