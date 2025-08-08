@@ -94,7 +94,7 @@ def display_question():
 
     After processing, the route checks if more questions remain using 
     engine.has_more_questions(). If so, it renders the next question via 
-    start.html. If not, it renders the final results via results.html.
+    game_question.html. If not, it renders the final results via results.html.
     """
 
     session.pop('current_custom_set', None) # clear any leftover custom set name from previous games
@@ -142,7 +142,7 @@ def display_question():
         return render_template("results.html", player_score=player_score)
 
     return render_template(
-        "start.html",
+        "game_question.html",
         question=question,
         feedback=feedback,
         player_score=player_score,
@@ -240,12 +240,12 @@ def custom_game_play():
 
     On each request, retrieves the current question list, index, and score from the session.
 
-    On GET: If there are questions remaining, renders the current question using the shared start.html template.
+    On GET: If there are questions remaining, renders the current question using the shared game_question.html template.
     On POST: Compares the submitted answer index directly to the stored correct answer index from the current question 
     (a plain dictionary from the session). Updates the score and index accordingly, and prepares a feedback message 
     ("Correct!" or "Wrong!"). Then:
         If all questions have been answered, renders the results.html page with the final score.
-        Otherwise, renders the next question via start.html with updated feedback and score.
+        Otherwise, renders the next question via game_question.html with updated feedback and score.
 
     This loop continues until all questions in the custom set have been completed.
     """
@@ -286,7 +286,7 @@ def custom_game_play():
         current_question = questions[index]
 
     return render_template(
-        "start.html",
+        "game_question.html",
         question=current_question,
         feedback=feedback,
         player_score=score,
