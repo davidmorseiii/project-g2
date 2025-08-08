@@ -13,20 +13,32 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
+# @app.before_request
+# def require_player_name():
+#     # List of routes to exclude from the check (and static files)
+#     exempt_routes = ['enter_name', 'static', 'home', 'debug_session', 'clear_session']
+
+#     # Skip check for exempt routes and static files
+#     if request.endpoint in exempt_routes or request.endpoint is None:
+#         return
+
+#     # Redirect to /enter-name if 'player_name' not in session
+#     if 'player_name' not in session:
+#         session['next'] = request.path  # Save where the user was going
+#         return redirect('/enter-name')
+    
 @app.before_request
-def require_player_name():
-    # List of routes to exclude from the check (and static files)
-    exempt_routes = ['enter_name', 'static']
+def debug_print_session():
+    print(session)
 
-    # Skip check for exempt routes and static files
-    if request.endpoint in exempt_routes or request.endpoint is None:
-        return
+@app.route('/debug-session')
+def debug_session():
+    return dict(session)
 
-    # Redirect to /enter-name if 'player_name' not in session
-    if 'player_name' not in session:
-        session['next'] = request.path  # Save where the user was going
-        return redirect('/enter-name')
-
+@app.route('/clear-session')
+def clear_session():
+    session = {}
+    return dict(session)
 
 @app.route('/')
 def home():
@@ -42,21 +54,28 @@ def scoreboard():
 @app.route('/enter-name', methods=['GET', 'POST'])
 def enter_name():
     if request.method == 'POST':
-        session['player_name'] = request.form['player_name']
+        player_name = request.form['player_name']
         game_type = request.form['game_type']
-        #look up if a user with this name exists, if not create one
-        user = User.query.filter_by(username=session['player_name']).first()
+
+        # Look up if a user with this name exists, if not create one
+        user = User.query.filter_by(username=player_name).first()
         if not user:
-            user = User(username=session['player_name'])
+            user = User(username=player_name)
             db.session.add(user)
             db.session.commit()
 
+        # Store both the username and user id in the session
+        session['player_name'] = user.username
+        session['user_id'] = user.id
+
+        # Redirect based on game type
         if game_type == 'default':
             return redirect('/start')
         elif game_type == 'custom':
             return redirect('/custom-sets')
-        
+
     return render_template('enter_name.html')
+
 
 
 @app.route('/start', methods=['GET', 'POST'])
@@ -134,61 +153,78 @@ def display_question():
 
 
 @app.route('/custom', methods=['GET', 'POST'])
+class CustomSetBuilder:
+    """
+    Helper class to manage the creation of custom question sets and questions in the database.
+    Keeps track of the current set being built in the session, but persists to DB.
+    """
+    def __init__(self, user):
+        self.user = user
+        self.set_id = None
+
+    def start_set(self, title):
+        new_set = QuestionSet(title=title, creator_id=self.user.id)
+        db.session.add(new_set)
+        db.session.commit()
+        self.set_id = new_set.id
+        return new_set
+
+    def add_question(self, prompt, options, correct_index):
+        if self.set_id is None:
+            raise ValueError("No set started")
+        q = Question(
+            set_id=self.set_id,
+            prompt=prompt,
+            correct_answer=str(correct_index)
+        )
+        q.set_choices(options)
+        db.session.add(q)
+        db.session.commit()
+        return q
+
+@app.route('/custom', methods=['GET', 'POST'])
 def custom_game():
     """
-    Manages the creation of custom question sets via a form, using session storage.
-
-    On GET: Renders the custom_game.html page. If the query parameter `reset=true` is present, 
-    the route clears any in-progress custom set from the session (removes 'custom_set_name' 
-    and 'custom_questions') to start fresh. Otherwise, it simply displays the form.
-
-    On POST:
-    If the form includes a `set_name` field, it indicates the start of a new custom set. 
-    The route stores the set name in the session, initializes an empty list for questions, 
-    and re-renders the form with success=False.
-    If the form includes question fields but no `set_name`, it processes a new question submission. 
-    A dictionary containing the question prompt, options, and correct answer index is created 
-    and appended to the session's 'custom_questions' list. This list is also saved under the 
-    session's 'all_custom_sets' dictionary, keyed by the set name.
-
-    After handling the submission, the form is re-rendered with a success flag to show confirmation, 
-    allowing the user to add more questions.
+    Manages the creation of custom question sets via a form, using the database for persistence.
+    Session is used only for tracking the current set being built.
     """
-
     if request.args.get('reset') == 'true':
-        session.pop('custom_set_name', None)
-        session.pop('custom_questions', None)
+        session.pop('custom_set_id', None)
         return render_template('index.html', success=False)
 
+    # Get or create user
+    user = User.query.filter_by(username=session.get('player_name')).first()
+    if not user:
+        return redirect('/enter-name')
+
+    builder = None
+    if 'custom_set_id' in session:
+        builder = CustomSetBuilder(user)
+        builder.set_id = session['custom_set_id']
+
     if request.method == 'POST':
-        # name the set if not done yet
         if 'set_name' in request.form:
-            session['custom_set_name'] = request.form['set_name']
-            session['custom_questions'] = []  # Initialize fresh list
+            # Start a new set
+            builder = CustomSetBuilder(user)
+            new_set = builder.start_set(request.form['set_name'])
+            session['custom_set_id'] = new_set.id
             return render_template('custom_game.html', success=False)
-        
-        # add a question
-        q = {
-            "category": "Custom",
-            "prompt": request.form['prompt'],
-            "options": [
-                request.form['option_a'],
-                request.form['option_b'],
-                request.form['option_c'],
-                request.form['option_d']
-            ],
-            "answer": int(request.form['correct'])
-        }
 
-        custom_qs = session.get('custom_questions', [])
-        custom_qs.append(q)
-        session['custom_questions'] = custom_qs
-
-        custom_sets = session.get('all_custom_sets', {})
-        set_name = session['custom_set_name']
-        custom_sets[set_name] = custom_qs
-        session['all_custom_sets'] = custom_sets
-
+        # Add a question to the current set
+        if builder is None:
+            return "No set started", 400
+        options = [
+            request.form['option_a'],
+            request.form['option_b'],
+            request.form['option_c'],
+            request.form['option_d']
+        ]
+        correct = int(request.form['correct'])
+        builder.add_question(
+            prompt=request.form['prompt'],
+            options=options,
+            correct_index=correct
+        )
         return render_template('custom_game.html', success=True)
 
     return render_template('custom_game.html', success=False)
