@@ -23,8 +23,8 @@ class GameEngine:
         Returns current Question object, or None if no more questions.
         """
         if self.has_more_questions():
-            print(self.questions[self.current_index])
-            print(f"Current index: {self.current_index}, Total questions: {len(self.questions)}")
+            # print(self.questions[self.current_index])
+            # print(f"Current index: {self.current_index}, Total questions: {len(self.questions)}")
             return self.questions[self.current_index]
         return None
 
