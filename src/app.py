@@ -20,7 +20,7 @@ def debug_session():
 @app.route('/clear-session')
 def clear_session():
     """Clears all session data and returns the now-empty session dictionary."""
-    session.clear()
+    session.clear()  # Remove all session variables
     return dict(session)
 
 @app.route('/')
@@ -34,7 +34,7 @@ def scoreboard():
     Displays the scoreboard by querying all GameResult entries 
     and sorting them in descending order by score.
     """
-    games = GameResult.query.order_by(GameResult.score.desc()).all()
+    games = GameResult.query.order_by(GameResult.score.desc()).all()  # Get all game results, highest score first
     return render_template("scoreboard.html", games=games)
 
 @app.route('/enter-name', methods=['GET', 'POST'])
@@ -51,23 +51,24 @@ def enter_name():
     - Renders the enter_name.html form.
     """
     if request.method == 'POST':
-        player_name = request.form['player_name']
-        game_type = request.form['game_type']
+        player_name = request.form['player_name']  # Get player name from form
+        game_type = request.form['game_type']      # Get selected game type
 
-        user = User.query.filter_by(username=player_name).first()
+        user = User.query.filter_by(username=player_name).first()  # Look up user in DB
         if not user:
-            user = User(username=player_name)
+            user = User(username=player_name)  # Create new user if not found
             db.session.add(user)
             db.session.commit()
 
-        session['player_name'] = user.username
-        session['user_id'] = user.id
+        session['player_name'] = user.username  # Store username in session
+        session['user_id'] = user.id            # Store user id in session
 
         if game_type == 'default':
-            return redirect('/start')
+            return redirect('/start')           # Start default game
         elif game_type == 'custom':
-            return redirect('/custom-sets')
+            return redirect('/custom-sets')     # Go to custom set chooser
 
+    # Render the name entry form
     return render_template('enter_name.html')
 
 def save_game_result(player_score, set_title="Default"):
@@ -80,11 +81,11 @@ def save_game_result(player_score, set_title="Default"):
     Returns:
         The QuestionSet instance used for the result.
     """
-    user_id = session.get('user_id', 1)
-    question_set = QuestionSet.query.filter_by(title=set_title).first()
+    user_id = session.get('user_id', 1)  # Get user id from session (default to 1)
+    question_set = QuestionSet.query.filter_by(title=set_title).first()  # Find set by title
 
     if not question_set:
-        question_set = QuestionSet(title=set_title, creator_id=user_id)
+        question_set = QuestionSet(title=set_title, creator_id=user_id)  # Create set if not found
         db.session.add(question_set)
         db.session.commit()
 
@@ -115,19 +116,19 @@ def display_question():
     - Saves the game result.
     - Renders the results screen.
     """
-    session.pop('current_custom_set', None)
+    session.pop('current_custom_set', None)  # Remove any custom set from session
     feedback = None
-    player_score = int(request.form.get("current_score", 0))
-    current_question = int(request.form.get("current_question", 0))
+    player_score = int(request.form.get("current_score", 0))      # Current score from form or 0
+    current_question = int(request.form.get("current_question", 0))  # Current question index from form or 0
 
-    engine = GameEngine()
-    engine.load_questions_json()
+    engine = GameEngine()                # Create game engine
+    engine.load_questions_json()         # Load questions from JSON
     engine.current_index = current_question
     engine.score = player_score
-    question = engine.get_current_question()
+    question = engine.get_current_question()  # Get the current question
 
     if request.method == 'POST':
-        selected = int(request.form.get("answer"))
+        selected = int(request.form.get("answer"))  # Get selected answer
         if selected and question.is_correct(selected):
             feedback = {"correct": True, "message": "Correct!"}
             player_score += 1
@@ -137,10 +138,10 @@ def display_question():
         engine.current_index = current_question
 
     if engine.has_more_questions():
-        question = engine.get_current_question()
+        question = engine.get_current_question()  # Next question
     else:
         set_title = session.get('current_custom_set', 'Default')
-        save_game_result(player_score, set_title)
+        save_game_result(player_score, set_title)  # Save result
 
         local_scores = session.get('local_scores', [])
         local_scores.append({
@@ -152,6 +153,7 @@ def display_question():
 
         return render_template("results.html", player_score=player_score)
 
+    # Render the question page
     return render_template(
         "game_question.html",
         question=question,
@@ -180,8 +182,8 @@ def custom_game():
 
     if request.method == 'POST':
         if 'set_name' in request.form:
-            session['custom_set_name'] = request.form['set_name']
-            session['custom_questions'] = []
+            session['custom_set_name'] = request.form['set_name']  # Store set name
+            session['custom_questions'] = []                      # Start with empty question list
             return render_template('custom_game.html', success=False)
 
         q = {
@@ -197,16 +199,17 @@ def custom_game():
         }
 
         custom_qs = session.get('custom_questions', [])
-        custom_qs.append(q)
+        custom_qs.append(q)  # Add new question to list
         session['custom_questions'] = custom_qs
 
         custom_sets = session.get('all_custom_sets', {})
         set_name = session['custom_set_name']
-        custom_sets[set_name] = custom_qs
+        custom_sets[set_name] = custom_qs  # Save set in session
         session['all_custom_sets'] = custom_sets
 
         return render_template('custom_game.html', success=True)
 
+    # Render the custom question builder form
     return render_template('custom_game.html', success=False)
 
 @app.route('/custom-game-play', methods=['GET', 'POST'])
@@ -222,31 +225,33 @@ def custom_game_play():
     - Updates score and index.
     - Saves GameResult at the end of the set.
     """
-    questions = session.get('custom_game_questions', [])
-    index = session.get('custom_current_index', 0)
-    score = session.get('custom_score', 0)
+    questions = session.get('custom_game_questions', [])  # List of questions for the current custom set
+    index = session.get('custom_current_index', 0)        # Current question index
+    score = session.get('custom_score', 0)                # Current score
 
+    # If all questions have been answered, show results
     if index >= len(questions):
         return render_template('results.html', player_score=score)
 
-    current_question = questions[index]
+    current_question = questions[index]  # Get the current question
     feedback = None
 
     if request.method == 'POST':
-        selected = int(request.form.get("answer", -1))
+        selected = int(request.form.get("answer", -1))  # Get the selected answer index from the form
         if selected == current_question['answer']:
-            feedback = {"correct": True, "message": "Correct!"}
+            feedback = {"correct": True, "message": "Correct!"}  # Correct answer feedback
             score += 1
         else:
-            feedback = {"correct": False, "message": "Wrong!"}
+            feedback = {"correct": False, "message": "Wrong!"}  # Wrong answer feedback
 
         index += 1
-        session['custom_current_index'] = index
-        session['custom_score'] = score
+        session['custom_current_index'] = index  # Update session with new index
+        session['custom_score'] = score          # Update session with new score
 
+        # If all questions have been answered after this answer, save result and show results page
         if index >= len(questions):
             set_title = session.get('current_custom_set', 'Default')
-            save_game_result(score, set_title)
+            save_game_result(score, set_title)  # Save the game result to the database
 
             local_scores = session.get('local_scores', [])
             local_scores.append({
@@ -258,8 +263,9 @@ def custom_game_play():
 
             return render_template('results.html', player_score=score)
 
-        current_question = questions[index]
+        current_question = questions[index]  # Move to the next question
 
+    # Render the question page with current question, feedback, and score
     return render_template(
         "game_question.html",
         question=current_question,
