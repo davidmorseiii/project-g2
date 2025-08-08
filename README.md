@@ -3,6 +3,8 @@
 
 Our Trivia Game is a Python-based trivia application that started as a command-line (CLI) game and is evolving into a web-based GUI version using Flask. The game quizzes the player with multiple-choice questions pulled from a JSON file, tracks the score, and presents results. The project uses a modular structure and supports expansion to multiplayer, persistent storage, and leaderboard features.
 
+A live version of the app is hosted at <a href="https://trivia.luke-merrill.com/">https://trivia.luke-merrill.com/<a>
+
 ---
 
 ## Features
