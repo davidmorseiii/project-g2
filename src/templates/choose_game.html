@@ -20,8 +20,8 @@ select the name of the set they would like to play.
         <form method="post" action="/start-custom">
             <label for="set_choice">Select a set to play:</label>
             <select name="set_choice" id="set_choice" required>
-                {% for set_name in sets %}
-                <option value="{{ set_name }}">{{ set_name }}</option>
+                {% for set in sets %}
+                <option value="{{ set.id }}">{{ set }}</option>
                 {% endfor %}
             </select>
             <button type="submit">Start Game</button>

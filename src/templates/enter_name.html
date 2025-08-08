@@ -17,9 +17,33 @@ or a custom set.
             <label for="player_name">Name:</label>
             <input type="text" name="player_name" id="player_name" required>
             <p>Which game would you like to play?</p>
-            <button type="submit" name="game_type" value="default">Default Game</button>
-            <button type="submit" name="game_type" value="custom">Custom Game</button>
+            <button type="submit" name="game_type" value="custom">Continue</button>
         </form>
+        <form style="margin-top: 30px;" action="/" method="get">
+            <button type="submit">Home</button>
+        </form>
+        <button id="modeToggle" style="margin-top: 40px;">Toggle Night/Day Mode</button>
     </div>
+         <script>
+        const toggleBtn = document.getElementById('modeToggle');
+
+        // load saved mode from localStorage
+        const savedMode = localStorage.getItem('theme');
+        if (savedMode === 'night') {
+            document.body.classList.add('night-mode');
+            toggleBtn.textContent = 'Switch to Day Mode';
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('night-mode');
+            
+            const isNight = document.body.classList.contains('night-mode');
+            localStorage.setItem('theme', isNight ? 'night' : 'day');
+
+            toggleBtn.textContent = isNight 
+                ? 'Switch to Day Mode' 
+                : 'Switch to Night Mode';
+        });
+    </script>   
 </body>
 </html>

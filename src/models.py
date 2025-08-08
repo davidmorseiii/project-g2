@@ -16,7 +16,11 @@ class QuestionSet(db.Model):
     title = db.Column(db.String(120), nullable=False)
     creator_id = db.Column(db.Integer, ForeignKey("user.id"))
     questions = relationship("Question", backref="question_set")
-
+    
+    def __str__(self):
+        return self.title
+    
+    
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     set_id = db.Column(db.Integer, ForeignKey("question_set.id"))

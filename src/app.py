@@ -13,19 +13,19 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-# @app.before_request
-# def require_player_name():
-#     # List of routes to exclude from the check (and static files)
-#     exempt_routes = ['enter_name', 'static', 'home', 'debug_session', 'clear_session']
+@app.before_request
+def require_player_name():
+    # List of routes to exclude from the check (and static files)
+    exempt_routes = ['enter_name', 'static', 'home', 'debug_session', 'clear_session']
 
-#     # Skip check for exempt routes and static files
-#     if request.endpoint in exempt_routes or request.endpoint is None:
-#         return
+    # Skip check for exempt routes and static files
+    if request.endpoint in exempt_routes or request.endpoint is None:
+        return
 
-#     # Redirect to /enter-name if 'player_name' not in session
-#     if 'player_name' not in session:
-#         session['next'] = request.path  # Save where the user was going
-#         return redirect('/enter-name')
+    # Redirect to /enter-name if 'player_name' not in session
+    if 'player_name' not in session:
+        session['next'] = request.path  # Save where the user was going
+        return redirect('/enter-name')
     
 @app.before_request
 def debug_print_session():
@@ -37,7 +37,7 @@ def debug_session():
 
 @app.route('/clear-session')
 def clear_session():
-    session = {}
+    session.clear()
     return dict(session)
 
 @app.route('/')
@@ -67,6 +67,8 @@ def enter_name():
         # Store both the username and user id in the session
         session['player_name'] = user.username
         session['user_id'] = user.id
+        
+        return redirect(session.get('next', '/'))  # Redirect to the saved path or home
 
         # Redirect based on game type
         if game_type == 'default':
@@ -78,7 +80,7 @@ def enter_name():
 
 
 
-@app.route('/start', methods=['GET', 'POST'])
+@app.route('/play', methods=['GET', 'POST'])
 def display_question():
     """
     Handles the main quiz gameplay route.
@@ -97,13 +99,12 @@ def display_question():
     game_question.html. If not, it renders the final results via results.html.
     """
 
-    session.pop('current_custom_set', None) # clear any leftover custom set name from previous games
     feedback = None
     player_score = int(request.form.get("current_score", 0))
     current_question = int(request.form.get("current_question", 0))
 
     engine = GameEngine()
-    engine.load_questions_json()
+    engine.load_questions_json() # We need to replace this with a database call
     engine.current_index = current_question
     engine.score = player_score
     question = engine.get_current_question()
@@ -152,7 +153,7 @@ def display_question():
 
 
 
-@app.route('/custom', methods=['GET', 'POST'])
+
 class CustomSetBuilder:
     """
     Helper class to manage the creation of custom question sets and questions in the database.
@@ -232,6 +233,9 @@ def custom_game():
 @app.route('/results')
 def results():
     return render_template("results.html", player_score=0)
+
+
+
 
 @app.route('/custom-game-play', methods=['GET', 'POST'])
 def custom_game_play():
@@ -315,21 +319,21 @@ def start_custom():
     """
 
     set_name = request.form['set_choice']
-    sets = session.get('all_custom_sets', {})
-    questions = sets.get(set_name)
+    # sets = session.get('all_custom_sets', {})
+    # questions = sets.get(set_name)
 
-    if not questions:
-        return "Set not found or empty", 400
+    # if not questions:
+    #     return "Set not found or empty", 400
 
-    session['current_custom_set'] = set_name
-    session['custom_game_questions'] = questions
-    session['custom_current_index'] = 0
-    session['custom_score'] = 0
+    session['current_set_id'] = set_name
+    # session['custom_game_questions'] = questions
+    # session['custom_current_index'] = 0
+    # session['custom_score'] = 0
 
-    return redirect('/custom-game-play')
+    return redirect('/play')
 
-@app.route('/custom-sets', methods=['GET'])
-def custom_sets():
+@app.route('/choose_game', methods=['GET'])
+def choose_game():
     """
     Presents a page (choose_custom_set.html) where the user can select one of the saved custom 
     question sets to play.
@@ -338,9 +342,10 @@ def custom_sets():
     and passes them to the template to populate a dropdown menu. If no custom sets are found, 
     the template displays a message indicating that no sets are currently available.
     """
+    sets = QuestionSet.query.all()
     
-    sets = session.get('all_custom_sets', {})
-    return render_template('choose_custom_set.html', sets=sets.keys())
+    # sets = session.get('all_custom_sets', {})
+    return render_template('choose_game.html', sets=sets)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
